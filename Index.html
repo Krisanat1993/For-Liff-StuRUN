@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ระบบส่งระยะเดิน/วิ่ง</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body { font-family: 'Kanit', sans-serif; padding: 20px; }
+    h2, h4 { text-align: center; }
+    .hidden { display: none; }
+    #filePreviewContainer { margin-top: 10px; text-align: center; }
+    #imagePreview, #videoPreview { max-width: 100%; max-height: 200px; border: 1px solid #ddd; margin-top: 5px;}
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">ระบบส่งระยะเดิน/วิ่ง</h2>
+    <form id="challenge-form">
+      <div class="form-group">
+        <label for="team">🔴 ทีม:</label>
+        <select id="team" class="form-control" disabled><option value="">กำลังดาวน์โหลด...</option></select>
+      </div>
+      <div class="form-group">
+        <label for="jocName">🔻 ชื่อ นทน. JOC.10:</label>
+        <select id="jocName" class="form-control" disabled><option value="">กำลังดาวน์โหลด...</option></select>
+      </div>
+      <div class="form-group">
+        <label for="officerName">🔻 ชื่อ ข้าราชการ สศท.สปท.:</label>
+        <input id="officerName" type="text" class="form-control" placeholder="กรอกชื่อ (ถ้ามี)">
+      </div>
+      <div class="form-group">
+        <label for="distance">🔻 ระยะเดิน/วิ่ง (กม.):</label>
+        <input id="distance" type="number" class="form-control" placeholder="กรอกระยะ (เช่น 5.2)" step="0.1" required>
+      </div>
+      <div class="form-group">
+        <label for="fileUpload">🖼️ อัพโหลดภาพ/วิดีโอ (ไม่เกิน 50MB):</label>
+        <input type="file" id="fileUpload" class="form-control-file" accept="image/*,video/*">
+        <div id="filePreviewContainer" class="hidden">
+          <p>ตัวอย่างไฟล์ที่เลือก:</p>
+          <img id="imagePreview" src="#" alt="Image Preview" class="hidden"/>
+          <video id="videoPreview" controls autoplay muted playsinline class="hidden"></video>
+        </div>
+      </div>
+      <button type="button" id="preview-button" class="btn btn-primary btn-block" onclick="previewData()">แสดงตัวอย่าง</button>
+    </form>
+
+    <div id="confirmation-container" class="hidden mt-4">
+      <h4>สรุปข้อมูลที่กรอก</h4>
+      <ul id="data-summary" class="list-group mb-3"></ul>
+      <div class="d-flex justify-content-around">
+        <button class="btn btn-success" onclick="submitData()">ยืนยันส่ง</button>
+        <button class="btn btn-secondary" onclick="editData()">แก้ไข</button>
+      </div>
+    </div>
+
+    <div id="success-section" class="hidden mt-4 text-center">
+      <h4>กำลังดำเนินการ...</h4>
+      <p id="successMessage"></p>
+    </div>
+
+    <div id="error-message" class="alert alert-danger text-center hidden"></div>
+  </div>
+
+  <script>
+   // =================================================================
+        // โค้ดที่เพิ่มเข้ามาเพื่อแก้ไขปัญหา Cache ของ LIFF
+        // =================================================================
+        const originalFetch = window.fetch;
+        window.fetch = async function(url, options) {
+            if (url.toString().startsWith('https://liffsdk.line-scdn.net/') && url.toString().endsWith('.json')) {
+                url = url + '?ts=' + Math.random();
+            }
+            return originalFetch(url, options);
+        };
+        // =================================================================
+  
+    // =================================================================
+    // กรุณาแก้ไขค่า 2 บรรทัดนี้ให้เป็นของคุณ
+    // =================================================================
+    const liffId = "2007483213-M8nB0DEV";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzfiEl9j14L25hhGKciyTpWQewnmebs2aSWvWOMkLOEuZdbJiGLQOCPUN5IB1h-JFA/exec";
+    // =================================================================
+
+    let formData = {};
+    let selectedFile = null;
+    let selectedFileBase64 = null;
+
+    async function initializeLiff() {
+      try {
+        await liff.init({ liffId });
+        const previewButton = document.getElementById('preview-button');
+        previewButton.disabled = true;
+        previewButton.innerText = 'กำลังโหลดข้อมูลฟอร์ม...';
+        await Promise.all([
+          populateDropdown('ฐานข้อมูล', 'A', 'team'),
+          populateDropdown('ฐานข้อมูล', 'B', 'jocName')
+        ]);
+        previewButton.disabled = false;
+        previewButton.innerText = 'แสดงตัวอย่าง';
+      } catch (err) {
+        console.error("LIFF/Dropdown Initialization Error:", err);
+        document.getElementById('error-message').innerText = "เกิดข้อผิดพลาดในการโหลดข้อมูลเริ่มต้น";
+        document.getElementById('error-message').classList.remove('hidden');
+      }
+    }
+
+    async function populateDropdown(sheet, column, selectId) {
+      const sel = document.getElementById(selectId);
+      try {
+        const res = await fetch(`${scriptURL}?action=getDropdown&sheet=${encodeURIComponent(sheet)}&column=${encodeURIComponent(column)}`);
+        if (!res.ok) throw new Error(`Network error: ${res.status}`);
+        const list = await res.json();
+        if (list.status === 'error') throw new Error(list.message);
+        sel.innerHTML = `<option value="">-- เลือก --</option>`;
+        list.forEach(item => {
+          const opt = new Option(item, item);
+          sel.add(opt);
+        });
+      } catch (error) {
+        console.error(`Failed to populate ${selectId}:`, error);
+        sel.innerHTML = `<option value="">โหลดข้อมูลไม่สำเร็จ</option>`;
+      } finally {
+        sel.disabled = false;
+      }
+    }
+
+    // ✅ ปรับแก้ฟังก์ชันนี้
+    document.getElementById('fileUpload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const previewContainer = document.getElementById('filePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const videoPreview = document.getElementById('videoPreview');
+        const resetAll = () => {
+            selectedFile = selectedFileBase64 = null;
+            imagePreview.classList.add('hidden'); 
+            videoPreview.classList.add('hidden');
+            previewContainer.classList.add('hidden'); 
+            event.target.value = '';
+        };
+
+        if (!file) { resetAll(); return; }
+        if (file.size > 50 * 1024 * 1024) { alert('ไฟล์มีขนาดใหญ่เกิน 50MB'); resetAll(); return; }
+        
+        selectedFile = file;
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            selectedFileBase64 = e.target.result;
+            const isImage = file.type.startsWith('image/');
+            
+            imagePreview.src = isImage ? selectedFileBase64 : '#';
+            videoPreview.src = isImage ? '' : selectedFileBase64;
+            
+            imagePreview.classList.toggle('hidden', !isImage);
+            videoPreview.classList.toggle('hidden', isImage);
+            
+            // ถ้าเป็นวิดีโอ สั่งให้โหลดและเล่นอัตโนมัติ
+            if (!isImage) {
+                videoPreview.load();
+                videoPreview.play().catch(error => {
+                    console.log("Browser prevented autoplay. The 'muted' attribute should allow it.", error);
+                });
+            }
+            
+            previewContainer.classList.remove('hidden');
+        }
+        reader.readAsDataURL(file);
+    });
+
+    function previewData() {
+      const team = document.getElementById('team').value;
+      const jocName = document.getElementById('jocName').value;
+      const officerName = document.getElementById('officerName').value;
+      const distance = document.getElementById('distance').value;
+      if (!team || !distance || parseFloat(distance) <= 0) { alert('กรุณากรอกข้อมูลให้ครบถ้วน: ทีม และระยะทางต้องมากกว่า 0'); return; }
+      if (!officerName && !jocName) { alert('กรุณากรอก "ชื่อ นทน. JOC.10" หรือ "ชื่อ ข้าราชการ สศท.สปท." อย่างน้อยหนึ่งช่อง'); return; }
+      formData = {
+        Timestamp: new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' }),
+        team, jocName: jocName || '(ไม่ได้ระบุ)', officerName: officerName || '(ไม่ได้ระบุ)', distance,
+        fileName: selectedFile ? selectedFile.name : '(ไม่ได้แนบไฟล์)'
+      };
+      const summary = document.getElementById('data-summary');
+      summary.innerHTML = `<li class="list-group-item"><strong>ทีม:</strong> ${formData.team}</li><li class="list-group-item"><strong>ชื่อ นทน. JOC.10:</strong> ${formData.jocName}</li><li class="list-group-item"><strong>ชื่อ ข้าราชการ สศท.สปท.:</strong> ${formData.officerName}</li><li class="list-group-item"><strong>ระยะทาง (กม.):</strong> ${formData.distance}</li><li class="list-group-item"><strong>ไฟล์ที่เลือก:</strong> ${formData.fileName}</li>`;
+      document.getElementById('challenge-form').classList.add('hidden');
+      document.getElementById('confirmation-container').classList.remove('hidden');
+    }
+
+    function editData() {
+      document.getElementById('confirmation-container').classList.add('hidden');
+      document.getElementById('challenge-form').classList.remove('hidden');
+    }
+
+    function generateVideoThumbnail(file) {
+      return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        const canvas = document.createElement('canvas');
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          video.src = e.target.result;
+          video.muted = true;
+          video.onloadeddata = () => video.currentTime = 1; 
+          video.onseeked = () => {
+            window.requestAnimationFrame(() => {
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+              resolve(canvas.toDataURL('image/jpeg')); 
+            });
+          };
+        };
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function createLineMessageForFile(fileType, fileUrl, previewUrl) {
+        if (fileType.startsWith('image/')) {
+            return { type: 'image', originalContentUrl: fileUrl, previewImageUrl: fileUrl };
+        }
+        if (fileType.startsWith('video/')) {
+            if (previewUrl) {
+                return { type: 'video', originalContentUrl: fileUrl, previewImageUrl: previewUrl };
+            }
+        }
+        return null;
+    }
+
+    async function submitData() {
+        document.getElementById('confirmation-container').classList.add('hidden');
+        document.getElementById('success-section').classList.remove('hidden');
+        
+        let detailedLineMessage = `🏃🏻‍♂️🏃🏻‍♂️ การสะสมระยะเดิน/วิ่ง:\n\n` +
+                                  `🔴 ทีม:  ${formData.team}\n` +
+                                  `🔻ชื่อ นทน. JOC.10:  ${formData.jocName}\n` +
+                                  `🔻ชื่อ ข้าราชการ สศท.สปท.:  ${formData.officerName}\n` +
+                                  `🔻กรอกระยะเดิน/วิ่ง กม.:  ${formData.distance}\n\n`;
+        try {
+            document.getElementById('successMessage').innerText = 'กำลังส่งข้อมูลไปยัง Google Sheet...';
+            const textPromise = fetch(scriptURL, {
+                method: 'POST',
+                body: new URLSearchParams({ action: 'submitText', textData: JSON.stringify(formData) })
+            }).then(res => res.json());
+
+            let fileUrl = null;
+            let previewImageUrl = null;
+
+            if (selectedFile) {
+                if (selectedFile.type.startsWith('video/')) {
+                    document.getElementById('successMessage').innerText = 'กำลังสร้างภาพปกวิดีโอ...';
+                    const thumbnailBase64 = await generateVideoThumbnail(selectedFile);
+                    document.getElementById('successMessage').innerText = 'กำลังอัปโหลดภาพปก...';
+                    const thumbResult = await fetch(scriptURL, {
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            action: 'uploadThumbnail',
+                            fileData: thumbnailBase64,
+                            fileName: `thumb_${selectedFile.name.split('.')[0]}.jpg`,
+                            mimeType: 'image/jpeg'
+                        })
+                    }).then(res => res.json());
+                    if (thumbResult.status === 'success') previewImageUrl = thumbResult.fileUrl;
+                    else throw new Error('ไม่สามารถอัปโหลดภาพปกวิดีโอได้');
+                }
+                
+                document.getElementById('successMessage').innerText = 'กำลังอัปโหลดไฟล์หลัก...';
+                const fileResult = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        action: 'uploadFile',
+                        fileData: selectedFileBase64,
+                        fileName: selectedFile.name,
+                        mimeType: selectedFile.type
+                    })
+                }).then(res => res.json());
+                if (fileResult.status === 'success') fileUrl = fileResult.fileUrl;
+                else detailedLineMessage += `\n\n(⚠️ การอัปโหลดไฟล์ล้มเหลว: ${fileResult.message})`;
+            }
+            
+            document.getElementById('successMessage').innerText = 'กำลังดึงข้อมูลสรุปผล...';
+            const [textResult, summarySheetData] = await Promise.all([textPromise, fetchSummarySheetData()]);
+            if (textResult.status !== 'success') throw new Error('ไม่สามารถบันทึกข้อมูลตัวอักษรได้');
+            
+            const lineMessagesToSend = [];
+            if (fileUrl) {
+                const fileMessage = createLineMessageForFile(selectedFile.type, fileUrl, previewImageUrl);
+                if (fileMessage) lineMessagesToSend.push(fileMessage);
+                else detailedLineMessage += `\n📎 ไฟล์ที่แนบ (ไม่สามารถแสดงตัวอย่างได้):\n${fileUrl}`;
+            }
+
+            detailedLineMessage += "🏆 สรุปผล Run Challenge:\n";
+            if (summarySheetData) {
+                detailedLineMessage += `🎯 ระยะ Challenge: ${summarySheetData.challengeGoal || 'N/A'} กม.\n`;
+                detailedLineMessage += `📈 ระยะสะสม: ${summarySheetData.totalAccumulated?.toFixed(2) || 'N/A'} กม.\n\n`;
+                summarySheetData.teams?.forEach(team => {
+                    if (team.name) detailedLineMessage += `🔻 ทีม ${team.name}\n • ระยะทาง: ${team.distance?.toFixed(2) || 'N/A'} กม. | อันดับ: ${team.rank || 'N/A'}\n\n`;
+                });
+            } else {
+                detailedLineMessage += "⚠️ ไม่สามารถโหลดข้อมูลสรุปผลได้\n\n";
+            }
+            detailedLineMessage += `‼️ลิงก์ส่งระยะ: https://liff.line.me/${liffId}`;
+            
+            lineMessagesToSend.unshift({ type: 'text', text: detailedLineMessage });
+            if (liff.isInClient()) {
+                document.getElementById('successMessage').innerText = 'กำลังส่งข้อความไปที่ LINE...';
+                await liff.sendMessages(lineMessagesToSend);
+                document.getElementById('successMessage').innerText = 'ดำเนินการทั้งหมดเรียบร้อย!';
+                setTimeout(() => liff.closeWindow(), 1500);
+            } else {
+                alert("อยู่นอกแอป LINE ข้อมูลถูกบันทึกแล้ว แต่ไม่สามารถส่งข้อความได้");
+                document.getElementById('successMessage').innerText = 'ดำเนินการทั้งหมดเรียบร้อย! (นอกแอป LINE)';
+            }
+        } catch (e) {
+            console.error('Error submitting data:', e);
+            document.getElementById('success-section').classList.add('hidden');
+            document.getElementById('error-message').innerText = `เกิดข้อผิดพลาด: ${e.message}`;
+            document.getElementById('error-message').classList.remove('hidden');
+        }
+    }
+    
+    async function fetchSummarySheetData() {
+        try {
+            const res = await fetch(`${scriptURL}?action=getSummaryResults`);
+            const result = await res.json();
+            return (result.status === 'success') ? result.data : null;
+        } catch (error) {
+            console.error("Error fetching summary sheet data:", error);
+            return null;
+        }
+    }
+
+    window.onload = initializeLiff;
+  </script>
+</body>
+</html>
