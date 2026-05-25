@@ -29,11 +29,8 @@
       --shadow:        0 8px 32px rgba(0,0,0,0.6);
       --shadow-accent: 0 4px 24px rgba(255,77,28,0.25);
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Kanit', sans-serif;
       background: var(--bg-base);
@@ -42,8 +39,6 @@
       padding-bottom: 40px;
       overflow-x: hidden;
     }
-
-    /* ── BACKGROUND GRID ── */
     body::before {
       content: '';
       position: fixed;
@@ -55,8 +50,6 @@
       pointer-events: none;
       z-index: 0;
     }
-
-    /* ── HERO HEADER ── */
     .hero {
       position: relative;
       padding: 36px 20px 28px;
@@ -87,7 +80,6 @@
       margin-bottom: 14px;
       animation: fadeDown 0.5s ease both;
     }
-    .hero-badge span { font-size: 14px; }
     .hero-title {
       font-family: 'Oswald', sans-serif;
       font-weight: 700;
@@ -97,10 +89,7 @@
       line-height: 1;
       animation: fadeDown 0.5s 0.1s ease both;
     }
-    .hero-title em {
-      color: var(--accent);
-      font-style: normal;
-    }
+    .hero-title em { color: var(--accent); font-style: normal; }
     .hero-sub {
       font-size: 13px;
       color: var(--text-secondary);
@@ -108,8 +97,6 @@
       font-weight: 300;
       animation: fadeDown 0.5s 0.2s ease both;
     }
-
-    /* ── WRAPPER ── */
     .wrap {
       position: relative;
       z-index: 1;
@@ -117,8 +104,6 @@
       margin: 0 auto;
       padding: 0 16px;
     }
-
-    /* ── STEP INDICATOR ── */
     .steps {
       display: flex;
       align-items: center;
@@ -135,29 +120,11 @@
       font-size: 11px; font-weight: 700;
       color: var(--text-muted);
       transition: all 0.3s;
-      position: relative;
-      z-index: 1;
     }
-    .step-dot.active {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 16px var(--accent-glow);
-    }
-    .step-dot.done {
-      border-color: var(--success);
-      background: var(--success-dim);
-      color: var(--success);
-    }
-    .step-line {
-      flex: 1; height: 2px;
-      background: var(--border);
-      max-width: 60px;
-      transition: background 0.3s;
-    }
+    .step-dot.active { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 16px var(--accent-glow); }
+    .step-dot.done   { border-color: var(--success); background: var(--success-dim); color: var(--success); }
+    .step-line { flex: 1; height: 2px; background: var(--border); max-width: 60px; transition: background 0.3s; }
     .step-line.done { background: var(--success); }
-
-    /* ── CARD ── */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -178,26 +145,10 @@
       align-items: center;
       gap: 8px;
     }
-    .card-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── FORM ELEMENTS ── */
+    .card-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
     .field { margin-bottom: 16px; }
     .field:last-child { margin-bottom: 0; }
-
-    label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 7px;
-      letter-spacing: 0.5px;
-    }
-
+    label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 7px; letter-spacing: 0.5px; }
     select, input[type="text"], input[type="number"] {
       width: 100%;
       background: var(--bg-input);
@@ -212,39 +163,19 @@
       appearance: none;
       -webkit-appearance: none;
     }
-    select:focus, input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-dim);
-    }
+    select:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
     select option { background: var(--bg-elevated); }
-    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a95a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a95a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
     input::placeholder { color: var(--text-muted); }
     input:disabled, select:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    /* ── DISTANCE SPECIAL ── */
-    .distance-wrap {
-      position: relative;
-    }
-    .distance-wrap input {
-      padding-right: 52px;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent2);
-      letter-spacing: 1px;
-    }
-    .distance-unit {
-      position: absolute;
-      right: 14px; top: 50%;
-      transform: translateY(-50%);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      pointer-events: none;
-    }
-
-    /* ── FILE UPLOAD ZONE ── */
+    .distance-wrap { position: relative; }
+    .distance-wrap input { padding-right: 52px; font-size: 18px; font-weight: 700; color: var(--accent2); letter-spacing: 1px; }
+    .distance-unit { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; pointer-events: none; }
     .upload-zone {
       border: 2px dashed var(--border);
       border-radius: var(--radius-sm);
@@ -254,948 +185,658 @@
       transition: all 0.2s;
       position: relative;
     }
-    .upload-zone:hover, .upload-zone.dragover {
-      border-color: var(--accent);
-      background: var(--accent-dim);
-    }
-    .upload-zone input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
-    }
-    .upload-icon {
-      font-size: 32px;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .upload-text {
-      font-size: 13px;
-      color: var(--text-secondary);
-    }
-    .upload-hint {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* ── FILE PREVIEW ── */
-    .file-preview-box {
-      margin-top: 14px;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      border: 1px solid var(--border);
-      display: none;
-    }
+    .upload-zone:hover, .upload-zone.dragover { border-color: var(--accent); background: var(--accent-dim); }
+    .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .upload-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+    .upload-text { font-size: 13px; color: var(--text-secondary); }
+    .upload-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    .file-preview-box { margin-top: 14px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); display: none; }
     .file-preview-box.show { display: block; }
-    .file-preview-box img,
-    .file-preview-box video {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-    .file-preview-name {
-      background: var(--bg-elevated);
-      padding: 8px 12px;
-      font-size: 12px;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .file-preview-name button {
-      background: none;
-      border: none;
-      color: var(--danger);
-      cursor: pointer;
-      font-size: 16px;
-      line-height: 1;
-      padding: 0;
-    }
-
-    /* ── UPLOAD PROGRESS ── */
-    .upload-progress-section {
-      display: none;
-      margin-top: 14px;
-    }
-    .upload-progress-section.show { display: block; }
-
-    .progress-item {
-      margin-bottom: 12px;
-    }
-    .progress-item:last-child { margin-bottom: 0; }
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-    .progress-label {
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 600;
-    }
-    .progress-pct {
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 700;
-      font-family: 'Oswald', sans-serif;
-    }
-    .progress-bar-track {
-      height: 6px;
-      background: var(--bg-input);
-      border-radius: 100px;
-      overflow: hidden;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      border-radius: 100px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transition: width 0.3s ease;
-      width: 0%;
-      box-shadow: 0 0 8px var(--accent-glow);
-    }
-    .progress-bar-fill.indeterminate {
-      width: 40% !important;
-      animation: indeterminate 1.2s ease-in-out infinite;
-    }
-    .progress-status {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-    .progress-done .progress-bar-fill {
-      background: linear-gradient(90deg, var(--success), #4ade80);
-      box-shadow: 0 0 8px rgba(34,197,94,0.4);
-    }
-    .progress-done .progress-pct { color: var(--success); }
-
-    /* ── BUTTONS ── */
+    .file-preview-box img, .file-preview-box video { width: 100%; max-height: 200px; object-fit: cover; display: block; }
+    .file-preview-name { background: var(--bg-elevated); padding: 8px 12px; font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between; }
+    .file-preview-name button { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 16px; line-height: 1; padding: 0; }
     .btn-primary {
-      display: block;
-      width: 100%;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: 'Kanit', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      padding: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: var(--shadow-accent);
-      position: relative;
-      overflow: hidden;
+      display: block; width: 100%;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      font-family: 'Kanit', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px;
+      padding: 14px; cursor: pointer; transition: all 0.2s;
+      box-shadow: var(--shadow-accent); position: relative; overflow: hidden;
     }
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-    }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%); }
     .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(255,77,28,0.45); }
     .btn-primary:active { transform: translateY(0); }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    .btn-success {
-      flex: 1;
-      background: var(--success);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: 'Kanit', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 13px;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 16px rgba(34,197,94,0.3);
-    }
+    .btn-success { flex: 1; background: var(--success); color: #fff; border: none; border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 700; padding: 13px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(34,197,94,0.3); }
     .btn-success:hover { background: #16a34a; transform: translateY(-1px); }
-
-    .btn-ghost {
-      flex: 1;
-      background: var(--bg-elevated);
-      color: var(--text-secondary);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-family: 'Kanit', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      padding: 13px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    .btn-ghost { flex: 1; background: var(--bg-elevated); color: var(--text-secondary); border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; padding: 13px; cursor: pointer; transition: all 0.2s; }
     .btn-ghost:hover { border-color: var(--text-secondary); color: var(--text-primary); }
-
-    .btn-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    /* ── CONFIRM SUMMARY ── */
-    .summary-list {
-      list-style: none;
-    }
-    .summary-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      gap: 12px;
-      font-size: 14px;
-    }
+    .btn-row { display: flex; gap: 10px; margin-top: 4px; }
+    .summary-list { list-style: none; }
+    .summary-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); gap: 12px; font-size: 14px; }
     .summary-item:last-child { border-bottom: none; }
-    .summary-key {
-      color: var(--text-muted);
-      font-size: 12px;
-      white-space: nowrap;
-      padding-top: 1px;
-    }
-    .summary-val {
-      color: var(--text-primary);
-      font-weight: 600;
-      text-align: right;
-      word-break: break-all;
-    }
-    .summary-val.highlight {
-      color: var(--accent2);
-      font-family: 'Oswald', sans-serif;
-      font-size: 20px;
-      letter-spacing: 1px;
-    }
-
-    /* ── PROCESSING / SUCCESS ── */
-    .processing-wrap {
-      text-align: center;
-      padding: 32px 20px;
-    }
-    .processing-icon {
-      font-size: 48px;
-      display: block;
-      margin-bottom: 16px;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    .processing-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-    }
-    .processing-msg {
-      font-size: 13px;
-      color: var(--text-secondary);
-      min-height: 20px;
-      transition: opacity 0.3s;
-    }
-
-    /* ── STEP LIST (processing) ── */
-    .step-list {
-      text-align: left;
-      margin-top: 24px;
-    }
-    .step-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-    }
+    .summary-key { color: var(--text-muted); font-size: 12px; white-space: nowrap; padding-top: 1px; }
+    .summary-val { color: var(--text-primary); font-weight: 600; text-align: right; word-break: break-all; }
+    .summary-val.highlight { color: var(--accent2); font-family: 'Oswald', sans-serif; font-size: 20px; letter-spacing: 1px; }
+    .processing-wrap { text-align: center; padding: 32px 20px 20px; }
+    .processing-icon { font-size: 48px; display: block; margin-bottom: 16px; animation: pulse 1.5s ease-in-out infinite; }
+    .processing-icon.done-anim { animation: successPop 0.5s ease both; }
+    .processing-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+    .processing-msg { font-size: 13px; color: var(--text-secondary); min-height: 20px; }
+    .step-list { text-align: left; margin-top: 16px; }
+    .step-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
     .step-row:last-child { border-bottom: none; }
-    .step-ico {
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px;
-      flex-shrink: 0;
-      background: var(--bg-elevated);
-      border: 1.5px solid var(--border);
-      color: var(--text-muted);
-      transition: all 0.3s;
-    }
-    .step-ico.spinning {
-      border-color: var(--accent);
-      animation: spin 0.8s linear infinite;
-    }
-    .step-ico.done-ico {
-      background: var(--success-dim);
-      border-color: var(--success);
-      color: var(--success);
-    }
-    .step-ico.err-ico {
-      background: rgba(239,68,68,0.1);
-      border-color: var(--danger);
-      color: var(--danger);
-    }
+    .step-ico { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; background: var(--bg-elevated); border: 1.5px solid var(--border); color: var(--text-muted); transition: all 0.3s; }
+    .step-ico.spinning { border-color: var(--accent); animation: spin 0.8s linear infinite; }
+    .step-ico.done-ico { background: var(--success-dim); border-color: var(--success); color: var(--success); animation: none; }
+    .step-ico.err-ico  { background: rgba(239,68,68,0.1); border-color: var(--danger); color: var(--danger); animation: none; }
     .step-text { flex: 1; color: var(--text-secondary); }
     .step-text.active { color: var(--text-primary); font-weight: 600; }
-    .step-size { font-size: 11px; color: var(--text-muted); }
 
-    /* ── ERROR ── */
-    .error-box {
-      background: rgba(239,68,68,0.1);
-      border: 1px solid rgba(239,68,68,0.3);
-      border-radius: var(--radius-sm);
-      padding: 14px 16px;
-      color: #fca5a5;
-      font-size: 13px;
-      display: none;
-    }
+    /* ── UPLOAD PROGRESS ── */
+    .upload-progress-section { display: none; margin-top: 16px; background: var(--bg-elevated); border-radius: var(--radius-sm); padding: 14px; border: 1px solid var(--border); }
+    .upload-progress-section.show { display: block; }
+    .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .progress-label { font-size: 12px; color: var(--text-secondary); font-weight: 600; }
+    .progress-pct { font-size: 14px; color: var(--accent); font-weight: 700; font-family: 'Oswald', sans-serif; }
+    .progress-bar-track { height: 8px; background: var(--bg-input); border-radius: 100px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.4s ease; width: 0%; box-shadow: 0 0 8px var(--accent-glow); }
+    .progress-bar-fill.success { background: linear-gradient(90deg, var(--success), #4ade80); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+    .progress-sub { display: flex; justify-content: space-between; margin-top: 6px; }
+    .progress-status { font-size: 11px; color: var(--text-muted); }
+    .progress-size   { font-size: 11px; color: var(--text-muted); font-family: 'Oswald', sans-serif; }
+    .progress-warn { margin-top: 8px; font-size: 11px; color: var(--accent2); display: flex; align-items: center; gap: 5px; }
+
+    .error-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: var(--radius-sm); padding: 14px 16px; color: #fca5a5; font-size: 13px; display: none; margin-top: 12px; }
     .error-box.show { display: block; }
-
-    /* ── HIDDEN ── */
     .hidden { display: none !important; }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.12); }
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes indeterminate {
-      0%   { margin-left: -40%; }
-      100% { margin-left: 100%; }
-    }
-    @keyframes successPop {
-      0%   { transform: scale(0.6); opacity: 0; }
-      70%  { transform: scale(1.15); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .success-pop { animation: successPop 0.5s ease both; }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(14px);  } to { opacity:1; transform:translateY(0); } }
+    @keyframes pulse    { 0%,100%{transform:scale(1);}  50%{transform:scale(1.12);} }
+    @keyframes spin     { to{transform:rotate(360deg);} }
+    @keyframes successPop { 0%{transform:scale(0.6);opacity:0;} 70%{transform:scale(1.15);} 100%{transform:scale(1);opacity:1;} }
   </style>
 </head>
 <body>
 
-  <!-- HERO HEADER -->
-  <div class="hero">
-    <div class="hero-badge"><span>🏃</span> RUN CHALLENGE</div>
-    <div class="hero-title">ส่ง<em>ระยะ</em>วิ่ง</div>
-    <div class="hero-sub">บันทึกระยะทางสะสมประจำวัน</div>
+<div class="hero">
+  <div class="hero-badge"><span>🏃</span> RUN CHALLENGE</div>
+  <div class="hero-title">ส่ง<em>ระยะ</em>วิ่ง</div>
+  <div class="hero-sub">บันทึกระยะทางสะสมประจำวัน</div>
+</div>
+
+<div class="wrap">
+
+  <div class="steps" id="stepIndicator">
+    <div class="step-dot active" id="s1">1</div>
+    <div class="step-line" id="sl1"></div>
+    <div class="step-dot" id="s2">2</div>
+    <div class="step-line" id="sl2"></div>
+    <div class="step-dot" id="s3">3</div>
   </div>
 
-  <div class="wrap">
-
-    <!-- STEP INDICATORS -->
-    <div class="steps" id="stepIndicator">
-      <div class="step-dot active" id="s1">1</div>
-      <div class="step-line" id="sl1"></div>
-      <div class="step-dot" id="s2">2</div>
-      <div class="step-line" id="sl2"></div>
-      <div class="step-dot" id="s3">3</div>
-    </div>
-
-    <!-- ═══════════════════════════════ STEP 1: FORM ═══════════════════════════════ -->
-    <div id="form-section">
-
-      <!-- Card: ข้อมูลทีม -->
-      <div class="card" style="animation-delay:0.1s">
-        <div class="card-label">ข้อมูลผู้ส่ง</div>
-
-        <div class="field">
-          <label>🔴 ทีม</label>
-          <select id="team" disabled>
-            <option value="">กำลังโหลด...</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>🔻 ชื่อ นทน. JOC</label>
-          <select id="jocName" disabled>
-            <option value="">กำลังโหลด...</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>🔻 ชื่อ ข้าราชการ สศท.สปท. <span style="color:var(--text-muted);font-weight:400">(ถ้ามี)</span></label>
-          <input id="officerName" type="text" placeholder="กรอกชื่อ...">
-        </div>
+  <!-- STEP 1: FORM -->
+  <div id="form-section">
+    <div class="card" style="animation-delay:0.1s">
+      <div class="card-label">ข้อมูลผู้ส่ง</div>
+      <div class="field">
+        <label>🔴 ทีม</label>
+        <select id="team" disabled><option value="">กำลังโหลด...</option></select>
       </div>
-
-      <!-- Card: ระยะทาง -->
-      <div class="card" style="animation-delay:0.2s">
-        <div class="card-label">ระยะทาง</div>
-        <div class="field">
-          <label>ระยะเดิน/วิ่ง</label>
-          <div class="distance-wrap">
-            <input id="distance" type="number" placeholder="0.0" step="0.1" min="0.1">
-            <span class="distance-unit">KM</span>
-          </div>
-        </div>
+      <div class="field">
+        <label>🔻 ชื่อ นทน. JOC</label>
+        <select id="jocName" disabled><option value="">กำลังโหลด...</option></select>
       </div>
-
-      <!-- Card: ไฟล์แนบ -->
-      <div class="card" style="animation-delay:0.3s">
-        <div class="card-label">หลักฐานการวิ่ง</div>
-        <div class="field">
-          <label>ภาพ / วิดีโอ <span style="color:var(--text-muted);font-weight:400">(ไม่เกิน 50MB)</span></label>
-          <div class="upload-zone" id="uploadZone">
-            <input type="file" id="fileUpload" accept="image/*,video/*">
-            <span class="upload-icon">📷</span>
-            <div class="upload-text">แตะเพื่อเลือกไฟล์</div>
-            <div class="upload-hint">รองรับ JPG, PNG, MP4, MOV</div>
-          </div>
-          <div class="file-preview-box" id="filePreviewBox">
-            <img id="imagePreview" src="#" alt="preview" style="display:none">
-            <video id="videoPreview" controls autoplay muted playsinline style="display:none"></video>
-            <div class="file-preview-name">
-              <span id="previewFileName">ชื่อไฟล์</span>
-              <button onclick="clearFile()" title="ลบไฟล์">✕</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn-primary" id="preview-button" onclick="previewData()" disabled>
-        ดูตัวอย่างก่อนส่ง →
-      </button>
-    </div>
-
-    <!-- ═══════════════════════════════ STEP 2: CONFIRM ═══════════════════════════════ -->
-    <div id="confirm-section" class="hidden">
-      <div class="card">
-        <div class="card-label">ยืนยันข้อมูล</div>
-        <ul class="summary-list" id="data-summary"></ul>
-      </div>
-      <div class="btn-row">
-        <button class="btn-ghost" onclick="editData()">← แก้ไข</button>
-        <button class="btn-success" onclick="submitData()">✓ ยืนยันส่ง</button>
+      <div class="field">
+        <label>🔻 ชื่อ ข้าราชการ สศท.สปท. <span style="color:var(--text-muted);font-weight:400">(ถ้ามี)</span></label>
+        <input id="officerName" type="text" placeholder="กรอกชื่อ...">
       </div>
     </div>
 
-    <!-- ═══════════════════════════════ STEP 3: PROCESSING ═══════════════════════════════ -->
-    <div id="processing-section" class="hidden">
-      <div class="card">
-        <div class="processing-wrap">
-          <span class="processing-icon" id="processingIcon">⚡</span>
-          <div class="processing-title" id="processingTitle">กำลังดำเนินการ</div>
-          <div class="processing-msg" id="processingMsg">กรุณารอสักครู่...</div>
+    <div class="card" style="animation-delay:0.2s">
+      <div class="card-label">ระยะทาง</div>
+      <div class="field">
+        <label>ระยะเดิน/วิ่ง</label>
+        <div class="distance-wrap">
+          <input id="distance" type="number" placeholder="0.0" step="0.1" min="0.1">
+          <span class="distance-unit">KM</span>
         </div>
+      </div>
+    </div>
 
-        <!-- Step list -->
-        <div class="step-list" id="stepList">
-          <div class="step-row" id="pstep-text">
-            <div class="step-ico" id="ico-text">1</div>
-            <div class="step-text" id="txt-text">บันทึกข้อมูลไปยัง Google Sheet</div>
-            <div class="step-size" id="sz-text"></div>
-          </div>
-          <div class="step-row" id="pstep-thumb" style="display:none">
-            <div class="step-ico" id="ico-thumb">2</div>
-            <div class="step-text" id="txt-thumb">สร้างภาพปกวิดีโอ</div>
-            <div class="step-size" id="sz-thumb"></div>
-          </div>
-          <div class="step-row" id="pstep-file" style="display:none">
-            <div class="step-ico" id="ico-file">3</div>
-            <div class="step-text" id="txt-file">อัปโหลดไฟล์</div>
-            <div class="step-size" id="sz-file"></div>
-          </div>
-          <div class="step-row" id="pstep-summary">
-            <div class="step-ico" id="ico-summary">4</div>
-            <div class="step-text" id="txt-summary">ดึงข้อมูลสรุปผล</div>
-            <div class="step-size" id="sz-summary"></div>
-          </div>
-          <div class="step-row" id="pstep-line">
-            <div class="step-ico" id="ico-line">5</div>
-            <div class="step-text" id="txt-line">ส่งข้อความไปที่ LINE</div>
-            <div class="step-size" id="sz-line"></div>
-          </div>
+    <div class="card" style="animation-delay:0.3s">
+      <div class="card-label">หลักฐานการวิ่ง</div>
+      <div class="field">
+        <label>ภาพ / วิดีโอ <span style="color:var(--text-muted);font-weight:400">(ไม่เกิน 50MB)</span></label>
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileUpload" accept="image/*,video/*">
+          <span class="upload-icon">📷</span>
+          <div class="upload-text">แตะเพื่อเลือกไฟล์</div>
+          <div class="upload-hint">รองรับ JPG, PNG, MP4, MOV</div>
         </div>
-
-        <!-- Upload progress bar (shows only when uploading file) -->
-        <div class="upload-progress-section" id="uploadProgressSection">
-          <div class="progress-item" id="progressItemFile">
-            <div class="progress-header">
-              <span class="progress-label" id="progressLabelFile">อัปโหลดไฟล์...</span>
-              <span class="progress-pct" id="progressPctFile">0%</span>
-            </div>
-            <div class="progress-bar-track">
-              <div class="progress-bar-fill indeterminate" id="progressBarFile"></div>
-            </div>
-            <div class="progress-status" id="progressStatusFile">กำลังส่งข้อมูล...</div>
+        <div class="file-preview-box" id="filePreviewBox">
+          <img id="imagePreview" src="#" alt="preview" style="display:none">
+          <video id="videoPreview" controls autoplay muted playsinline style="display:none"></video>
+          <div class="file-preview-name">
+            <span id="previewFileName"></span>
+            <button onclick="clearFile()" title="ลบไฟล์">✕</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ERROR -->
-    <div class="error-box" id="error-message"></div>
+    <button class="btn-primary" id="preview-button" onclick="previewData()" disabled>
+      ดูตัวอย่างก่อนส่ง →
+    </button>
+  </div>
 
-  </div><!-- /wrap -->
+  <!-- STEP 2: CONFIRM -->
+  <div id="confirm-section" class="hidden">
+    <div class="card">
+      <div class="card-label">ยืนยันข้อมูล</div>
+      <ul class="summary-list" id="data-summary"></ul>
+    </div>
+    <div class="btn-row">
+      <button class="btn-ghost" onclick="editData()">← แก้ไข</button>
+      <button class="btn-success" onclick="submitData()">✓ ยืนยันส่ง</button>
+    </div>
+  </div>
 
-  <script>
-    // ── Cache fix for LIFF ──
-    const _origFetch = window.fetch;
-    window.fetch = async function(url, options) {
-      if (url.toString().startsWith('https://liffsdk.line-scdn.net/') && url.toString().endsWith('.json')) {
-        url = url + '?ts=' + Math.random();
-      }
-      return _origFetch(url, options);
+  <!-- STEP 3: PROCESSING -->
+  <div id="processing-section" class="hidden">
+    <div class="card">
+      <div class="processing-wrap">
+        <span class="processing-icon" id="processingIcon">⚡</span>
+        <div class="processing-title" id="processingTitle">กำลังดำเนินการ</div>
+        <div class="processing-msg" id="processingMsg">กรุณารอสักครู่...</div>
+      </div>
+
+      <!-- Upload progress bar -->
+      <div class="upload-progress-section" id="uploadProgressSection">
+        <div class="progress-header">
+          <span class="progress-label" id="progressLabel">อัปโหลดไฟล์...</span>
+          <span class="progress-pct" id="progressPct">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <div class="progress-sub">
+          <span class="progress-status" id="progressStatus">กำลังส่งข้อมูล...</span>
+          <span class="progress-size" id="progressSize"></span>
+        </div>
+        <div class="progress-warn">⚠️ กรุณาอย่าปิดหน้าต่างนี้จนกว่าจะเสร็จ</div>
+      </div>
+
+      <!-- Step list -->
+      <div class="step-list" id="stepList">
+        <div class="step-row">
+          <div class="step-ico" id="ico-text">1</div>
+          <div class="step-text" id="txt-text">บันทึกข้อมูลไปยัง Google Sheet</div>
+        </div>
+        <div class="step-row" id="pstep-thumb" style="display:none">
+          <div class="step-ico" id="ico-thumb">2</div>
+          <div class="step-text" id="txt-thumb">สร้างภาพปกวิดีโอ</div>
+        </div>
+        <div class="step-row" id="pstep-file" style="display:none">
+          <div class="step-ico" id="ico-file">3</div>
+          <div class="step-text" id="txt-file">อัปโหลดไฟล์</div>
+        </div>
+        <div class="step-row">
+          <div class="step-ico" id="ico-summary">4</div>
+          <div class="step-text" id="txt-summary">ดึงข้อมูลสรุปผล</div>
+        </div>
+        <div class="step-row">
+          <div class="step-ico" id="ico-line">5</div>
+          <div class="step-text" id="txt-line">ส่งข้อความไปที่ LINE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="error-box" id="error-message"></div>
+</div>
+
+<script>
+  // ── Cache fix ──
+  const _origFetch = window.fetch;
+  window.fetch = async function(url, options) {
+    if (typeof url === 'string' && url.startsWith('https://liffsdk.line-scdn.net/') && url.endsWith('.json')) {
+      url = url + '?ts=' + Math.random();
+    }
+    return _origFetch(url, options);
+  };
+
+  // ── CONFIG ──
+  const liffId    = "2007483213-M8nB0DEV";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzfiEl9j14L25hhGKciyTpWQewnmebs2aSWvWOMkLOEuZdbJiGLQOCPUN5IB1h-JFA/exec";
+
+  let formData           = {};
+  let selectedFile       = null;
+  let selectedFileBase64 = null;
+
+  // ── INIT ──
+  async function initializeLiff() {
+    try {
+      await liff.init({ liffId });
+      const btn = document.getElementById('preview-button');
+      btn.disabled    = true;
+      btn.textContent = 'กำลังโหลดข้อมูล...';
+      await Promise.all([
+        populateDropdown('ฐานข้อมูล', 'A', 'team'),
+        populateDropdown('ฐานข้อมูล', 'B', 'jocName')
+      ]);
+      btn.disabled    = false;
+      btn.textContent = 'ดูตัวอย่างก่อนส่ง →';
+    } catch (err) {
+      console.error("Init error:", err);
+      showError("เกิดข้อผิดพลาดในการโหลดข้อมูลเริ่มต้น: " + err.message);
+    }
+  }
+
+  async function populateDropdown(sheet, column, selectId) {
+    const sel = document.getElementById(selectId);
+    try {
+      const res  = await _origFetch(`${scriptURL}?action=getDropdown&sheet=${encodeURIComponent(sheet)}&column=${encodeURIComponent(column)}`);
+      if (!res.ok) throw new Error(`Network error: ${res.status}`);
+      const list = await res.json();
+      if (list.status === 'error') throw new Error(list.message);
+      sel.innerHTML = '<option value="">— เลือก —</option>';
+      list.forEach(item => sel.add(new Option(item, item)));
+    } catch (err) {
+      console.error(`Failed ${selectId}:`, err);
+      sel.innerHTML = '<option value="">โหลดไม่สำเร็จ</option>';
+    } finally {
+      sel.disabled = false;
+    }
+  }
+
+  // ── FILE ──
+  document.getElementById('fileUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) { clearFile(); return; }
+    if (file.size > 50 * 1024 * 1024) { alert('ไฟล์มีขนาดใหญ่เกิน 50MB'); clearFile(); return; }
+    selectedFile = file;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      selectedFileBase64 = ev.target.result;
+      showFilePreview(file, selectedFileBase64);
     };
+    reader.readAsDataURL(file);
+  });
 
-    // ── CONFIG ──
-    const liffId    = "2007483213-M8nB0DEV";
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzfiEl9j14L25hhGKciyTpWQewnmebs2aSWvWOMkLOEuZdbJiGLQOCPUN5IB1h-JFA/exec";
+  function showFilePreview(file, dataUrl) {
+    const isImage = file.type.startsWith('image/');
+    const img = document.getElementById('imagePreview');
+    const vid = document.getElementById('videoPreview');
+    img.style.display = isImage ? 'block' : 'none';
+    vid.style.display = isImage ? 'none'  : 'block';
+    if (isImage) { img.src = dataUrl; }
+    else { vid.src = dataUrl; vid.load(); vid.play().catch(() => {}); }
+    document.getElementById('previewFileName').textContent = file.name + ' (' + formatBytes(file.size) + ')';
+    document.getElementById('filePreviewBox').classList.add('show');
+    document.querySelector('.upload-icon').textContent = isImage ? '🖼️' : '🎬';
+    document.querySelector('.upload-text').textContent  = 'ไฟล์ที่เลือก';
+  }
 
-    let formData         = {};
-    let selectedFile     = null;
-    let selectedFileBase64 = null;
+  function clearFile() {
+    selectedFile = selectedFileBase64 = null;
+    document.getElementById('fileUpload').value = '';
+    document.getElementById('filePreviewBox').classList.remove('show');
+    document.getElementById('imagePreview').src = '#';
+    document.getElementById('videoPreview').src = '';
+    document.querySelector('.upload-icon').textContent = '📷';
+    document.querySelector('.upload-text').textContent = 'แตะเพื่อเลือกไฟล์';
+  }
 
-    // ── INIT ──
-    async function initializeLiff() {
-      try {
-        await liff.init({ liffId });
-        const btn = document.getElementById('preview-button');
-        btn.disabled = true;
-        btn.textContent = 'กำลังโหลดข้อมูล...';
-        await Promise.all([
-          populateDropdown('ฐานข้อมูล', 'A', 'team'),
-          populateDropdown('ฐานข้อมูล', 'B', 'jocName')
-        ]);
-        btn.disabled = false;
-        btn.textContent = 'ดูตัวอย่างก่อนส่ง →';
-      } catch (err) {
-        console.error("Init error:", err);
-        showError("เกิดข้อผิดพลาดในการโหลดข้อมูลเริ่มต้น: " + err.message);
-      }
+  function formatBytes(b) {
+    if (b < 1024)       return b + ' B';
+    if (b < 1048576)    return (b/1024).toFixed(1) + ' KB';
+    return (b/1048576).toFixed(1) + ' MB';
+  }
+
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop',      e => { e.preventDefault(); zone.classList.remove('dragover'); });
+
+  // ── STEP UI ──
+  function setStep(n) {
+    for (let i = 1; i <= 3; i++) {
+      const dot  = document.getElementById('s' + i);
+      const line = document.getElementById('sl' + i);
+      dot.classList.remove('active','done');
+      if (i < n)       { dot.classList.add('done'); dot.textContent = '✓'; }
+      else if (i === n){ dot.classList.add('active'); dot.textContent = i; }
+      else             { dot.textContent = i; }
+      if (line) line.classList.toggle('done', i < n);
     }
+  }
 
-    async function populateDropdown(sheet, column, selectId) {
-      const sel = document.getElementById(selectId);
-      try {
-        const res = await fetch(`${scriptURL}?action=getDropdown&sheet=${encodeURIComponent(sheet)}&column=${encodeURIComponent(column)}`);
-        if (!res.ok) throw new Error(`Network error: ${res.status}`);
-        const list = await res.json();
-        if (list.status === 'error') throw new Error(list.message);
-        sel.innerHTML = '<option value="">— เลือก —</option>';
-        list.forEach(item => sel.add(new Option(item, item)));
-      } catch (err) {
-        console.error(`Failed ${selectId}:`, err);
-        sel.innerHTML = '<option value="">โหลดไม่สำเร็จ</option>';
-      } finally {
-        sel.disabled = false;
-      }
+  function setStepState(id, state, text) {
+    const ico = document.getElementById('ico-' + id);
+    const txt = document.getElementById('txt-' + id);
+    if (!ico) return;
+    ico.className = 'step-ico';
+    txt.className = 'step-text';
+    const num = ico.textContent; // keep original number as fallback
+    if (state === 'spin')  { ico.classList.add('spinning'); ico.textContent = '↻'; txt.classList.add('active'); }
+    if (state === 'done')  { ico.classList.add('done-ico'); ico.textContent = '✓'; }
+    if (state === 'error') { ico.classList.add('err-ico');  ico.textContent = '✕'; }
+    if (state === 'idle')  { ico.textContent = num; }
+    if (text) txt.textContent = text;
+  }
+
+  // ── PROGRESS BAR (animated simulation + real timing) ──
+  let _progressTimer = null;
+
+  function showProgressBar(label, fileSizeBytes) {
+    clearProgressTimer();
+    const sec = document.getElementById('uploadProgressSection');
+    sec.classList.add('show');
+    document.getElementById('progressLabel').textContent = label || 'อัปโหลดไฟล์...';
+    document.getElementById('progressSize').textContent  = fileSizeBytes ? formatBytes(fileSizeBytes) : '';
+    setProgressBar(0, 'กำลังเชื่อมต่อ...');
+  }
+
+  function setProgressBar(pct, statusText) {
+    const bar = document.getElementById('progressBar');
+    bar.style.width = Math.min(pct, 100) + '%';
+    bar.classList.remove('success');
+    document.getElementById('progressPct').textContent    = Math.round(pct) + '%';
+    document.getElementById('progressStatus').textContent = statusText || '';
+  }
+
+  // Simulate smooth progress — GAS doesn't support real streaming progress
+  // so we animate to 90% over estimated time, then jump to 100% when done
+  function startProgressSimulation(fileSizeBytes) {
+    clearProgressTimer();
+    // Rough estimate: ~150KB/s for GAS upload (conservative)
+    const estimatedMs = Math.max(4000, (fileSizeBytes / 150000) * 1000);
+    const intervalMs  = 200;
+    const steps       = estimatedMs / intervalMs;
+    let   current     = 0;
+    const target      = 90; // never reach 100% until real done
+
+    _progressTimer = setInterval(() => {
+      // ease-out curve: accelerate at start, slow at end
+      const remaining = target - current;
+      current += remaining * 0.06;
+      setProgressBar(current, current < 30 ? 'กำลังเตรียมข้อมูล...' : current < 70 ? 'กำลังส่งข้อมูล...' : 'กำลังบันทึก...');
+    }, intervalMs);
+  }
+
+  function clearProgressTimer() {
+    if (_progressTimer) { clearInterval(_progressTimer); _progressTimer = null; }
+  }
+
+  function doneProgressBar(statusText) {
+    clearProgressTimer();
+    const bar = document.getElementById('progressBar');
+    bar.style.width = '100%';
+    bar.classList.add('success');
+    document.getElementById('progressPct').textContent    = '100%';
+    document.getElementById('progressStatus').textContent = statusText || 'อัปโหลดสำเร็จ! ✓';
+  }
+
+  function hideProgressBar() {
+    clearProgressTimer();
+    document.getElementById('uploadProgressSection').classList.remove('show');
+  }
+
+  // ── PREVIEW / EDIT ──
+  function previewData() {
+    const team        = document.getElementById('team').value;
+    const jocName     = document.getElementById('jocName').value;
+    const officerName = document.getElementById('officerName').value.trim();
+    const distance    = document.getElementById('distance').value;
+    if (!team || !distance || parseFloat(distance) <= 0) {
+      alert('กรุณากรอกข้อมูลให้ครบ: ทีม และระยะทางต้องมากกว่า 0');
+      return;
     }
-
-    // ── FILE HANDLING ──
-    document.getElementById('fileUpload').addEventListener('change', handleFileSelect);
-
-    function handleFileSelect(event) {
-      const file = event.target.files[0];
-      if (!file) { clearFile(); return; }
-      if (file.size > 50 * 1024 * 1024) {
-        alert('ไฟล์มีขนาดใหญ่เกิน 50MB');
-        clearFile();
-        return;
-      }
-      selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        selectedFileBase64 = e.target.result;
-        showFilePreview(file, selectedFileBase64);
-      };
-      reader.readAsDataURL(file);
+    if (!officerName && !jocName) {
+      alert('กรุณากรอก "ชื่อ นทน. JOC" หรือ "ชื่อ ข้าราชการ สศท.สปท." อย่างน้อยหนึ่งช่อง');
+      return;
     }
+    formData = {
+      Timestamp:   new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' }),
+      team,
+      jocName:     jocName     || '(ไม่ได้ระบุ)',
+      officerName: officerName || '(ไม่ได้ระบุ)',
+      distance,
+      fileName:    selectedFile ? selectedFile.name : '(ไม่ได้แนบไฟล์)'
+    };
+    const rows = [
+      ['ทีม',                    formData.team],
+      ['ชื่อ นทน. JOC',          formData.jocName],
+      ['ชื่อ ข้าราชการ สศท.สปท.', formData.officerName],
+      ['ระยะทาง',                formData.distance + ' กม.', 'highlight'],
+      ['ไฟล์แนบ',               formData.fileName],
+    ];
+    document.getElementById('data-summary').innerHTML = rows.map(([k, v, cls]) =>
+      `<li class="summary-item"><span class="summary-key">${k}</span><span class="summary-val ${cls||''}">${v}</span></li>`
+    ).join('');
+    document.getElementById('form-section').classList.add('hidden');
+    document.getElementById('confirm-section').classList.remove('hidden');
+    setStep(2);
+  }
 
-    function showFilePreview(file, dataUrl) {
-      const box  = document.getElementById('filePreviewBox');
-      const img  = document.getElementById('imagePreview');
-      const vid  = document.getElementById('videoPreview');
-      const name = document.getElementById('previewFileName');
-      const isImage = file.type.startsWith('image/');
+  function editData() {
+    document.getElementById('confirm-section').classList.add('hidden');
+    document.getElementById('form-section').classList.remove('hidden');
+    setStep(1);
+  }
 
-      img.style.display = isImage ? 'block' : 'none';
-      vid.style.display = isImage ? 'none'  : 'block';
+  // ── UPLOAD using fetch (GAS-compatible) with simulated progress ──
+  // GAS redirect: fetch follows redirects correctly; XHR blocks cross-origin redirects
+  async function uploadViaFetch(params) {
+    const res = await _origFetch(scriptURL, {
+      method: 'POST',
+      body:   new URLSearchParams(params)
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if (json.status === 'error') throw new Error(json.message);
+    return json;
+  }
 
-      if (isImage) { img.src = dataUrl; }
-      else { vid.src = dataUrl; vid.load(); vid.play().catch(() => {}); }
+  // ── SUBMIT ──
+  async function submitData() {
+    document.getElementById('confirm-section').classList.add('hidden');
+    document.getElementById('processing-section').classList.remove('hidden');
+    document.getElementById('error-message').classList.remove('show');
+    setStep(3);
 
-      name.textContent = file.name + ' (' + formatBytes(file.size) + ')';
-      box.classList.add('show');
+    const isVideo = selectedFile && selectedFile.type.startsWith('video/');
+    const hasFile = !!selectedFile;
+    document.getElementById('pstep-thumb').style.display = isVideo ? '' : 'none';
+    document.getElementById('pstep-file').style.display  = hasFile ? '' : 'none';
 
-      // update upload zone icon
-      document.querySelector('.upload-icon').textContent = isImage ? '🖼️' : '🎬';
-      document.querySelector('.upload-text').textContent = 'ไฟล์ที่เลือก';
-    }
+    let detailedLineMessage =
+      `🏃🏻‍♂️🏃🏻‍♂️ การสะสมระยะเดิน/วิ่ง:\n\n` +
+      `🔴 ทีม:  ${formData.team}\n` +
+      `🔻ชื่อ นทน. JOC:  ${formData.jocName}\n` +
+      `🔻ชื่อ ข้าราชการ สศท.สปท.:  ${formData.officerName}\n` +
+      `🔻กรอกระยะเดิน/วิ่ง กม.:  ${formData.distance}\n\n`;
 
-    function clearFile() {
-      selectedFile = selectedFileBase64 = null;
-      document.getElementById('fileUpload').value = '';
-      document.getElementById('filePreviewBox').classList.remove('show');
-      document.getElementById('imagePreview').src = '#';
-      document.getElementById('videoPreview').src = '';
-      document.querySelector('.upload-icon').textContent = '📷';
-      document.querySelector('.upload-text').textContent = 'แตะเพื่อเลือกไฟล์';
-    }
+    let fileUrl       = null;
+    let previewImgUrl = null;
 
-    function formatBytes(bytes) {
-      if (bytes < 1024) return bytes + ' B';
-      if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-      return (bytes/(1024*1024)).toFixed(1) + ' MB';
-    }
+    try {
+      // ── 1. บันทึก text (parallel) ──
+      setStepState('text', 'spin', 'บันทึกข้อมูลไปยัง Google Sheet');
+      document.getElementById('processingMsg').textContent = 'กำลังบันทึกข้อมูล...';
+      const textPromise = _origFetch(scriptURL, {
+        method: 'POST',
+        body:   new URLSearchParams({ action: 'submitText', textData: JSON.stringify(formData) })
+      }).then(r => r.json());
 
-    // drag-over visual
-    const zone = document.getElementById('uploadZone');
-    zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('dragover'); });
-    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-    zone.addEventListener('drop',      e => { e.preventDefault(); zone.classList.remove('dragover'); });
+      // ── 2. Thumbnail (video only) ──
+      if (isVideo) {
+        setStepState('thumb', 'spin', 'สร้างภาพปกวิดีโอ...');
+        document.getElementById('processingMsg').textContent = 'กำลังสร้างภาพปก...';
+        const thumbBase64 = await generateVideoThumbnail(selectedFile);
 
-    // ── STEP INDICATORS ──
-    function setStep(n) {
-      for (let i = 1; i <= 3; i++) {
-        const dot  = document.getElementById('s' + i);
-        const line = document.getElementById('sl' + (i));
-        dot.classList.remove('active','done');
-        if (i < n)       { dot.classList.add('done'); dot.textContent = '✓'; }
-        else if (i === n){ dot.classList.add('active'); }
-        else             { dot.textContent = i; }
-        if (line) line.classList.toggle('done', i < n);
-      }
-    }
+        setStepState('thumb', 'spin', 'อัปโหลดภาพปกวิดีโอ...');
+        showProgressBar('อัปโหลดภาพปกวิดีโอ');
+        startProgressSimulation(thumbBase64.length * 0.75); // approx decoded size
 
-    // ── PREVIEW ──
-    function previewData() {
-      const team        = document.getElementById('team').value;
-      const jocName     = document.getElementById('jocName').value;
-      const officerName = document.getElementById('officerName').value.trim();
-      const distance    = document.getElementById('distance').value;
-
-      if (!team || !distance || parseFloat(distance) <= 0) {
-        alert('กรุณากรอกข้อมูลให้ครบ: ทีม และระยะทางต้องมากกว่า 0');
-        return;
-      }
-      if (!officerName && !jocName) {
-        alert('กรุณากรอก "ชื่อ นทน. JOC" หรือ "ชื่อ ข้าราชการ สศท.สปท." อย่างน้อยหนึ่งช่อง');
-        return;
-      }
-
-      formData = {
-        Timestamp: new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' }),
-        team,
-        jocName:     jocName     || '(ไม่ได้ระบุ)',
-        officerName: officerName || '(ไม่ได้ระบุ)',
-        distance,
-        fileName: selectedFile ? selectedFile.name : '(ไม่ได้แนบไฟล์)'
-      };
-
-      const rows = [
-        ['ทีม',                   formData.team],
-        ['ชื่อ นทน. JOC',         formData.jocName],
-        ['ชื่อ ข้าราชการ สศท.สปท.', formData.officerName],
-        ['ระยะทาง',               formData.distance + ' กม.', 'highlight'],
-        ['ไฟล์แนบ',              formData.fileName],
-      ];
-
-      document.getElementById('data-summary').innerHTML = rows.map(([k, v, cls]) =>
-        `<li class="summary-item">
-          <span class="summary-key">${k}</span>
-          <span class="summary-val ${cls||''}">${v}</span>
-        </li>`
-      ).join('');
-
-      document.getElementById('form-section').classList.add('hidden');
-      document.getElementById('confirm-section').classList.remove('hidden');
-      setStep(2);
-    }
-
-    function editData() {
-      document.getElementById('confirm-section').classList.add('hidden');
-      document.getElementById('form-section').classList.remove('hidden');
-      setStep(1);
-    }
-
-    // ── PROCESSING STEP HELPERS ──
-    function setStepState(id, state, text) {
-      const ico = document.getElementById('ico-' + id);
-      const txt = document.getElementById('txt-' + id);
-      ico.className = 'step-ico';
-      txt.className = 'step-text';
-      if (state === 'spin')  { ico.className += ' spinning'; ico.textContent = '↻'; txt.className += ' active'; }
-      if (state === 'done')  { ico.className += ' done-ico'; ico.textContent = '✓'; }
-      if (state === 'error') { ico.className += ' err-ico';  ico.textContent = '✕'; }
-      if (state === 'idle')  { ico.textContent = ico.dataset.n || ''; }
-      if (text) txt.textContent = text;
-    }
-
-    function showProgressBar(label) {
-      const sec = document.getElementById('uploadProgressSection');
-      sec.classList.add('show');
-      document.getElementById('progressLabelFile').textContent = label || 'อัปโหลดไฟล์...';
-      document.getElementById('progressPctFile').textContent   = '0%';
-      document.getElementById('progressBarFile').style.width   = '0%';
-      document.getElementById('progressBarFile').classList.add('indeterminate');
-      document.getElementById('progressStatusFile').textContent = 'กำลังส่งข้อมูล...';
-    }
-
-    function updateProgressBar(pct, statusText) {
-      const bar = document.getElementById('progressBarFile');
-      bar.classList.remove('indeterminate');
-      bar.style.width = pct + '%';
-      document.getElementById('progressPctFile').textContent   = pct + '%';
-      document.getElementById('progressStatusFile').textContent = statusText || '';
-    }
-
-    function doneProgressBar(label) {
-      updateProgressBar(100, label || 'เสร็จสิ้น');
-      document.getElementById('progressItemFile').classList.add('progress-done');
-      document.getElementById('progressPctFile').textContent = '100%';
-    }
-
-    function hideProgressBar() {
-      document.getElementById('uploadProgressSection').classList.remove('show');
-    }
-
-    // ── XHR UPLOAD with real progress ──
-    function uploadWithProgress(url, params, onProgress) {
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true);
-
-        xhr.upload.addEventListener('progress', (e) => {
-          if (e.lengthComputable) {
-            const pct = Math.round((e.loaded / e.total) * 100);
-            onProgress(pct, `${formatBytes(e.loaded)} / ${formatBytes(e.total)}`);
-          }
+        const thumbResult = await uploadViaFetch({
+          action:   'uploadThumbnail',
+          fileData: thumbBase64,
+          fileName: `thumb_${selectedFile.name.replace(/\.[^.]+$/, '')}.jpg`,
+          mimeType: 'image/jpeg'
         });
 
-        xhr.onload = () => {
-          try {
-            resolve(JSON.parse(xhr.responseText));
-          } catch (err) {
-            reject(new Error('Parse error: ' + xhr.responseText.slice(0, 100)));
-          }
-        };
-        xhr.onerror = () => reject(new Error('Network error during upload'));
+        previewImgUrl = thumbResult.fileUrl;
+        doneProgressBar('อัปโหลดภาพปกสำเร็จ ✓');
+        setStepState('thumb', 'done');
+        await new Promise(r => setTimeout(r, 600));
+        hideProgressBar();
+      }
 
-        const body = new URLSearchParams(params);
-        xhr.send(body);
-      });
+      // ── 3. Upload main file ──
+      if (hasFile) {
+        const label = `อัปโหลดไฟล์ (${formatBytes(selectedFile.size)})`;
+        showProgressBar(label, selectedFile.size);
+        startProgressSimulation(selectedFile.size);
+        setStepState('file', 'spin', label);
+        document.getElementById('processingMsg').textContent = 'กำลังอัปโหลดไฟล์ — กรุณาอย่าปิดหน้าต่างนี้';
+
+        const fileResult = await uploadViaFetch({
+          action:   'uploadFile',
+          fileData: selectedFileBase64,
+          fileName: selectedFile.name,
+          mimeType: selectedFile.type
+        });
+
+        fileUrl = fileResult.fileUrl;
+        doneProgressBar('อัปโหลดไฟล์สำเร็จ ✓');
+        setStepState('file', 'done');
+        await new Promise(r => setTimeout(r, 600));
+        hideProgressBar();
+      }
+
+      // ── 4. ตรวจสอบ text result ──
+      const textResult = await textPromise;
+      if (textResult.status !== 'success') throw new Error('ไม่สามารถบันทึกข้อมูลได้: ' + (textResult.message || ''));
+      setStepState('text', 'done');
+
+      // ── 5. Summary ──
+      setStepState('summary', 'spin', 'ดึงข้อมูลสรุปผล...');
+      document.getElementById('processingMsg').textContent = 'กำลังดึงข้อมูลสรุปผล...';
+      const summaryData = await fetchSummarySheetData();
+      setStepState('summary', 'done');
+
+      // ── Build LINE messages ──
+      const lineMessages = [];
+      if (fileUrl) {
+        const fileMsg = createLineMessageForFile(selectedFile.type, fileUrl, previewImgUrl);
+        if (fileMsg) lineMessages.push(fileMsg);
+        else detailedLineMessage += `\n📎 ไฟล์แนบ:\n${fileUrl}\n\n`;
+      }
+
+      detailedLineMessage += '🏆 สรุปผล Run Challenge:\n';
+      if (summaryData) {
+        detailedLineMessage += `🎯 ระยะ Challenge: ${summaryData.challengeGoal || 'N/A'} กม.\n`;
+        detailedLineMessage += `📈 ระยะสะสม: ${(summaryData.totalAccumulated || 0).toFixed(2)} กม.\n\n`;
+        (summaryData.teams || []).forEach(t => {
+          if (t.name) detailedLineMessage += `🔻 ทีม ${t.name}\n • ระยะ: ${(t.distance||0).toFixed(2)} กม. | อันดับ: ${t.rank||'N/A'}\n\n`;
+        });
+      } else {
+        detailedLineMessage += '⚠️ ไม่สามารถโหลดข้อมูลสรุปผลได้\n\n';
+      }
+      detailedLineMessage += `‼️ลิงก์ส่งระยะ: https://liff.line.me/${liffId}`;
+
+      lineMessages.unshift({ type: 'text', text: detailedLineMessage });
+
+      // ── 6. ส่ง LINE ──
+      setStepState('line', 'spin', 'ส่งข้อความไปที่ LINE...');
+      document.getElementById('processingMsg').textContent = 'กำลังส่งข้อความ...';
+
+      if (liff.isInClient()) {
+        await liff.sendMessages(lineMessages);
+        setStepState('line', 'done');
+        const icon = document.getElementById('processingIcon');
+        icon.textContent = '🎉';
+        icon.classList.remove('processing-icon');
+        icon.classList.add('done-anim');
+        document.getElementById('processingTitle').textContent = 'สำเร็จ!';
+        document.getElementById('processingMsg').textContent   = 'ดำเนินการทั้งหมดเรียบร้อยแล้ว';
+        setTimeout(() => liff.closeWindow(), 2000);
+      } else {
+        setStepState('line', 'error', 'อยู่นอกแอป LINE (ไม่สามารถส่งได้)');
+        document.getElementById('processingIcon').textContent  = '✅';
+        document.getElementById('processingTitle').textContent = 'บันทึกแล้ว';
+        document.getElementById('processingMsg').textContent   = 'ข้อมูลถูกบันทึกแล้ว แต่อยู่นอกแอป LINE';
+      }
+
+    } catch (err) {
+      console.error('Submit error:', err);
+      clearProgressTimer();
+      hideProgressBar();
+      document.getElementById('processing-section').classList.add('hidden');
+      showError('เกิดข้อผิดพลาด: ' + err.message);
+      // allow retry from confirm
+      setStep(2);
+      document.getElementById('confirm-section').classList.remove('hidden');
     }
+  }
 
-    // ── SUBMIT ──
-    async function submitData() {
-      document.getElementById('confirm-section').classList.add('hidden');
-      document.getElementById('processing-section').classList.remove('hidden');
-      setStep(3);
+  // ── HELPERS ──
+  function createLineMessageForFile(fileType, fileUrl, previewUrl) {
+    if (fileType.startsWith('image/')) {
+      return { type: 'image', originalContentUrl: fileUrl, previewImageUrl: fileUrl };
+    }
+    if (fileType.startsWith('video/')) {
+      if (!previewUrl) { console.warn("No thumbnail"); return null; }
+      return { type: 'video', originalContentUrl: fileUrl, previewImageUrl: previewUrl };
+    }
+    return null;
+  }
 
-      // show/hide video steps
-      const isVideo = selectedFile && selectedFile.type.startsWith('video/');
-      const hasFile = !!selectedFile;
-      document.getElementById('pstep-thumb').style.display = isVideo ? '' : 'none';
-      document.getElementById('pstep-file').style.display  = hasFile ? '' : 'none';
-
-      let detailedLineMessage =
-        `🏃🏻‍♂️🏃🏻‍♂️ การสะสมระยะเดิน/วิ่ง:\n\n` +
-        `🔴 ทีม:  ${formData.team}\n` +
-        `🔻ชื่อ นทน. JOC:  ${formData.jocName}\n` +
-        `🔻ชื่อ ข้าราชการ สศท.สปท.:  ${formData.officerName}\n` +
-        `🔻กรอกระยะเดิน/วิ่ง กม.:  ${formData.distance}\n\n`;
-
-      try {
-        // ── STEP: บันทึก text ──
-        setStepState('text', 'spin', 'บันทึกข้อมูลไปยัง Google Sheet');
-        document.getElementById('processingMsg').textContent = 'กำลังบันทึกข้อมูล...';
-        const textPromise = fetch(scriptURL, {
-          method: 'POST',
-          body: new URLSearchParams({ action: 'submitText', textData: JSON.stringify(formData) })
-        }).then(r => r.json());
-
-        let fileUrl       = null;
-        let previewImgUrl = null;
-
-        // ── STEP: thumbnail (video only) ──
-        if (isVideo) {
-          setStepState('thumb', 'spin', 'สร้างภาพปกวิดีโอ');
-          document.getElementById('processingMsg').textContent = 'กำลังสร้างภาพปก...';
-          const thumbBase64 = await generateVideoThumbnail(selectedFile);
-
-          showProgressBar('อัปโหลดภาพปกวิดีโอ...');
-          setStepState('thumb', 'spin', 'อัปโหลดภาพปกวิดีโอ');
-
-          const thumbResult = await uploadWithProgress(
-            scriptURL,
-            {
-              action:   'uploadThumbnail',
-              fileData: thumbBase64,
-              fileName: `thumb_${selectedFile.name.split('.')[0]}.jpg`,
-              mimeType: 'image/jpeg'
-            },
-            (pct, sizeStr) => updateProgressBar(pct, sizeStr)
-          );
-
-          if (thumbResult.status === 'success') {
-            previewImgUrl = thumbResult.fileUrl;
-            doneProgressBar('อัปโหลดภาพปกสำเร็จ');
-            setStepState('thumb', 'done');
-          } else {
-            throw new Error('ไม่สามารถอัปโหลดภาพปกวิดีโอได้');
-          }
-          hideProgressBar();
-        }
-
-        // ── STEP: upload file ──
-        if (hasFile) {
-          const fileSizeStr = formatBytes(selectedFile.size);
-          showProgressBar(`อัปโหลดไฟล์ (${fileSizeStr})`);
-          setStepState('file', 'spin', `อัปโหลดไฟล์ (${fileSizeStr})`);
-          document.getElementById('processingMsg').textContent = 'กำลังอัปโหลดไฟล์ กรุณาอย่าปิดหน้าต่างนี้...';
-
-          const fileResult = await uploadWithProgress(
-            scriptURL,
-            {
-              action:   'uploadFile',
-              fileData: selectedFileBase64,
-              fileName: selectedFile.name,
-              mimeType: selectedFile.type
-            },
-            (pct, sizeStr) => updateProgressBar(pct, `${sizeStr} จาก ${fileSizeStr}`)
-          );
-
-          if (fileResult.status === 'success') {
-            fileUrl = fileResult.fileUrl;
-            doneProgressBar('อัปโหลดสำเร็จ!');
-            setStepState('file', 'done');
-          } else {
-            detailedLineMessage += `\n\n(⚠️ อัปโหลดไฟล์ล้มเหลว: ${fileResult.message})`;
-            setStepState('file', 'error', 'อัปโหลดล้มเหลว');
-          }
-          setTimeout(hideProgressBar, 800);
-        }
-
-        // wait for text result
-        setStepState('text', 'spin');
-        const textResult = await textPromise;
-        if (textResult.status !== 'success') throw new Error('ไม่สามารถบันทึกข้อมูลได้');
-        setStepState('text', 'done');
-
-        // ── STEP: summary ──
-        setStepState('summary', 'spin', 'ดึงข้อมูลสรุปผล');
-        document.getElementById('processingMsg').textContent = 'กำลังดึงข้อมูลสรุปผล...';
-        const summaryData = await fetchSummarySheetData();
-        setStepState('summary', 'done');
-
-        // build LINE messages
-        const lineMessages = [];
-
-        if (fileUrl) {
-          const fileMsg = createLineMessageForFile(selectedFile.type, fileUrl, previewImgUrl);
-          if (fileMsg) lineMessages.push(fileMsg);
-          else detailedLineMessage += `\n📎 ไฟล์แนบ:\n${fileUrl}\n\n`;
-        }
-
-        detailedLineMessage += "🏆 สรุปผล Run Challenge:\n";
-        if (summaryData) {
-          detailedLineMessage += `🎯 ระยะ Challenge: ${summaryData.challengeGoal || 'N/A'} กม.\n`;
-          detailedLineMessage += `📈 ระยะสะสม: ${(summaryData.totalAccumulated || 0).toFixed(2)} กม.\n\n`;
-          (summaryData.teams || []).forEach(t => {
-            if (t.name) detailedLineMessage += `🔻 ทีม ${t.name}\n • ระยะ: ${(t.distance||0).toFixed(2)} กม. | อันดับ: ${t.rank||'N/A'}\n\n`;
+  function generateVideoThumbnail(file) {
+    return new Promise((resolve, reject) => {
+      const video  = document.createElement('video');
+      const canvas = document.createElement('canvas');
+      const reader = new FileReader();
+      reader.onload = e => {
+        video.src   = e.target.result;
+        video.muted = true;
+        video.onloadeddata = () => { video.currentTime = 1; };
+        video.onseeked = () => {
+          requestAnimationFrame(() => {
+            canvas.width  = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            resolve(canvas.toDataURL('image/jpeg'));
           });
-        } else {
-          detailedLineMessage += "⚠️ ไม่สามารถโหลดข้อมูลสรุปผลได้\n\n";
-        }
-        detailedLineMessage += `‼️ลิงก์ส่งระยะ: https://liff.line.me/${liffId}`;
+        };
+        video.onerror = reject;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
 
-        lineMessages.unshift({ type: 'text', text: detailedLineMessage });
-
-        // ── STEP: send LINE ──
-        setStepState('line', 'spin', 'ส่งข้อความไปที่ LINE');
-        document.getElementById('processingMsg').textContent = 'กำลังส่งข้อความ...';
-
-        if (liff.isInClient()) {
-          await liff.sendMessages(lineMessages);
-          setStepState('line', 'done');
-          document.getElementById('processingIcon').textContent = '🎉';
-          document.getElementById('processingIcon').classList.add('success-pop');
-          document.getElementById('processingTitle').textContent = 'สำเร็จ!';
-          document.getElementById('processingMsg').textContent   = 'ดำเนินการทั้งหมดเรียบร้อยแล้ว';
-          setTimeout(() => liff.closeWindow(), 2000);
-        } else {
-          setStepState('line', 'error', 'อยู่นอกแอป LINE');
-          document.getElementById('processingIcon').textContent = '✅';
-          document.getElementById('processingTitle').textContent = 'บันทึกแล้ว';
-          document.getElementById('processingMsg').textContent   = 'ข้อมูลถูกบันทึกแล้ว แต่ไม่สามารถส่ง LINE ได้ (อยู่นอกแอป)';
-        }
-
-      } catch (err) {
-        console.error('Submit error:', err);
-        document.getElementById('processing-section').classList.add('hidden');
-        showError('เกิดข้อผิดพลาด: ' + err.message);
-        setStep(2);
-        document.getElementById('confirm-section').classList.remove('hidden');
-      }
-    }
-
-    // ── HELPERS ──
-    function createLineMessageForFile(fileType, fileUrl, previewUrl) {
-      if (fileType.startsWith('image/')) {
-        return { type: 'image', originalContentUrl: fileUrl, previewImageUrl: fileUrl };
-      }
-      if (fileType.startsWith('video/')) {
-        if (!previewUrl) { console.warn("No thumbnail for video"); return null; }
-        return { type: 'video', originalContentUrl: fileUrl, previewImageUrl: previewUrl };
-      }
+  async function fetchSummarySheetData() {
+    try {
+      const res    = await _origFetch(`${scriptURL}?action=getSummaryResults`);
+      const result = await res.json();
+      return result.status === 'success' ? result.data : null;
+    } catch (e) {
+      console.error("Summary error:", e);
       return null;
     }
+  }
 
-    function generateVideoThumbnail(file) {
-      return new Promise((resolve, reject) => {
-        const video  = document.createElement('video');
-        const canvas = document.createElement('canvas');
-        const reader = new FileReader();
-        reader.onload = e => {
-          video.src   = e.target.result;
-          video.muted = true;
-          video.onloadeddata = () => { video.currentTime = 1; };
-          video.onseeked = () => {
-            window.requestAnimationFrame(() => {
-              canvas.width  = video.videoWidth;
-              canvas.height = video.videoHeight;
-              canvas.getContext('2d').drawImage(video, 0, 0);
-              resolve(canvas.toDataURL('image/jpeg'));
-            });
-          };
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
+  function showError(msg) {
+    const el = document.getElementById('error-message');
+    el.textContent = msg;
+    el.classList.add('show');
+  }
 
-    async function fetchSummarySheetData() {
-      try {
-        const res    = await fetch(`${scriptURL}?action=getSummaryResults`);
-        const result = await res.json();
-        return result.status === 'success' ? result.data : null;
-      } catch (e) {
-        console.error("Summary fetch error:", e);
-        return null;
-      }
-    }
-
-    function showError(msg) {
-      const el = document.getElementById('error-message');
-      el.textContent = msg;
-      el.classList.add('show');
-    }
-
-    window.onload = initializeLiff;
-  </script>
+  window.onload = initializeLiff;
+</script>
 </body>
 </html>
