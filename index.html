@@ -23,6 +23,8 @@
       --success:       #22c55e;
       --success-dim:   rgba(34,197,94,0.15);
       --danger:        #ef4444;
+      --warn:          #f59e0b;
+      --warn-dim:      rgba(245,158,11,0.12);
       --radius:        14px;
       --radius-sm:     8px;
       --shadow:        0 8px 32px rgba(0,0,0,0.6);
@@ -38,63 +40,32 @@
       overflow-x: hidden;
     }
     body::before {
-      content: '';
-      position: fixed; inset: 0;
+      content: ''; position: fixed; inset: 0;
       background-image:
         linear-gradient(rgba(255,77,28,0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,77,28,0.04) 1px, transparent 1px);
       background-size: 40px 40px;
       pointer-events: none; z-index: 0;
     }
-    .hero {
-      position: relative;
-      padding: 36px 20px 28px;
-      text-align: center;
-    }
-    .hero::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 60%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--accent-dim);
-      border: 1px solid rgba(255,77,28,0.3);
-      border-radius: 100px; padding: 4px 14px;
-      font-size: 11px; font-weight: 600; letter-spacing: 2px;
-      color: var(--accent); text-transform: uppercase;
-      margin-bottom: 14px;
-      animation: fadeDown 0.5s ease both;
-    }
-    .hero-title {
-      font-family: 'Oswald', sans-serif; font-weight: 700;
-      font-size: clamp(28px, 7vw, 42px);
-      letter-spacing: 3px; text-transform: uppercase; line-height: 1;
-      animation: fadeDown 0.5s 0.1s ease both;
-    }
+    .hero { position: relative; padding: 36px 20px 28px; text-align: center; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-dim); border: 1px solid rgba(255,77,28,0.3); border-radius: 100px; padding: 4px 14px; font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; animation: fadeDown .5s ease both; }
+    .hero-title { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: clamp(28px,7vw,42px); letter-spacing: 3px; text-transform: uppercase; line-height: 1; animation: fadeDown .5s .1s ease both; }
     .hero-title em { color: var(--accent); font-style: normal; }
-    .hero-sub {
-      font-size: 13px; color: var(--text-secondary);
-      margin-top: 8px; font-weight: 300;
-      animation: fadeDown 0.5s 0.2s ease both;
-    }
+    .hero-sub { font-size: 13px; color: var(--text-secondary); margin-top: 8px; font-weight: 300; animation: fadeDown .5s .2s ease both; }
     .wrap { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 0 16px; }
 
-    /* Steps */
-    .steps { display: flex; align-items: center; justify-content: center; margin: 20px 0 24px; animation: fadeUp 0.5s 0.3s ease both; }
-    .step-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-muted); transition: all 0.3s; }
+    .steps { display: flex; align-items: center; justify-content: center; margin: 20px 0 24px; animation: fadeUp .5s .3s ease both; }
+    .step-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-muted); transition: all .3s; }
     .step-dot.active { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 0 16px var(--accent-glow); }
     .step-dot.done   { border-color: var(--success); background: var(--success-dim); color: var(--success); }
-    .step-line { flex: 1; height: 2px; background: var(--border); max-width: 60px; transition: background 0.3s; }
+    .step-line { flex: 1; height: 2px; background: var(--border); max-width: 60px; transition: background .3s; }
     .step-line.done { background: var(--success); }
 
-    /* Card */
-    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; margin-bottom: 14px; box-shadow: var(--shadow); animation: fadeUp 0.4s ease both; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; margin-bottom: 14px; box-shadow: var(--shadow); animation: fadeUp .4s ease both; }
     .card-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
     .card-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-    /* Fields */
     .field { margin-bottom: 16px; }
     .field:last-child { margin-bottom: 0; }
     label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 7px; }
@@ -102,50 +73,68 @@
       width: 100%; background: var(--bg-input); border: 1.5px solid var(--border);
       border-radius: var(--radius-sm); color: var(--text-primary);
       font-family: 'Kanit', sans-serif; font-size: 14px; padding: 11px 14px;
-      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none; transition: border-color .2s, box-shadow .2s;
       appearance: none; -webkit-appearance: none;
     }
     select:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
     select option { background: var(--bg-elevated); }
     select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a95a3' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
     input::placeholder { color: var(--text-muted); }
-    input:disabled, select:disabled { opacity: 0.5; cursor: not-allowed; }
+    input:disabled, select:disabled { opacity: .5; cursor: not-allowed; }
 
     .distance-wrap { position: relative; }
     .distance-wrap input { padding-right: 52px; font-size: 18px; font-weight: 700; color: var(--accent2); }
     .distance-unit { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 700; color: var(--text-muted); pointer-events: none; }
 
-    /* Upload zone */
-    .upload-zone { border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 24px 16px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; }
+    .upload-zone { border: 2px dashed var(--border); border-radius: var(--radius-sm); padding: 24px 16px; text-align: center; cursor: pointer; transition: all .2s; position: relative; }
     .upload-zone:hover { border-color: var(--accent); background: var(--accent-dim); }
     .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
     .upload-icon { font-size: 32px; margin-bottom: 8px; display: block; }
     .upload-text { font-size: 13px; color: var(--text-secondary); }
     .upload-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    .compress-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.25); border-radius: 100px; padding: 3px 10px; font-size: 10px; color: var(--success); font-weight: 600; }
 
-    /* compress badge */
-    .compress-badge { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); border-radius: 100px; padding: 3px 10px; font-size: 10px; color: var(--success); font-weight: 600; }
-
-    /* File preview */
     .file-preview-box { margin-top: 14px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); display: none; }
     .file-preview-box.show { display: block; }
     .file-preview-box img, .file-preview-box video { width: 100%; max-height: 200px; object-fit: cover; display: block; }
-    .file-preview-name { background: var(--bg-elevated); padding: 8px 12px; font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .file-preview-name .size-info { color: var(--success); font-size: 11px; white-space: nowrap; }
+    .file-preview-name { background: var(--bg-elevated); padding: 8px 12px; font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+    .file-preview-name .fn { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .size-info { color: var(--success); font-size: 11px; white-space: nowrap; }
     .file-preview-name button { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 16px; padding: 0; flex-shrink: 0; }
 
-    /* Buttons */
-    .btn-primary { display: block; width: 100%; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; padding: 14px; cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-accent); position: relative; overflow: hidden; }
-    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%); }
-    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(255,77,28,0.45); }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .btn-success { flex: 1; background: var(--success); color: #fff; border: none; border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 700; padding: 13px; cursor: pointer; transition: all 0.2s; }
+    /* ── DUPLICATE MODAL ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.8); display: flex; align-items: center; justify-content: center; z-index: 999; padding: 20px; animation: fadeIn .2s ease; }
+    .modal-overlay.hidden { display: none; }
+    .modal-box { background: var(--bg-card); border: 1px solid var(--warn); border-radius: var(--radius); padding: 24px 20px; max-width: 380px; width: 100%; box-shadow: 0 0 40px rgba(245,158,11,.25); animation: popUp .25s ease; }
+    .modal-icon  { font-size: 40px; text-align: center; margin-bottom: 12px; }
+    .modal-title { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 1px; color: var(--warn); text-align: center; margin-bottom: 8px; }
+    .modal-body  { font-size: 13px; color: var(--text-secondary); text-align: center; line-height: 1.7; margin-bottom: 18px; }
+    .modal-body strong { color: var(--text-primary); }
+    .dup-detail  { background: var(--warn-dim); border: 1px solid rgba(245,158,11,.2); border-radius: var(--radius-sm); padding: 10px 14px; margin: 12px 0; font-size: 12px; color: var(--accent2); text-align: left; line-height: 1.9; }
+    .dup-checking { text-align: center; padding: 8px 0; font-size: 13px; color: var(--text-muted); }
+    .modal-btns  { display: flex; gap: 10px; }
+    .btn-warn    { flex: 1; background: var(--warn); color: #000; border: none; border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 700; padding: 12px; cursor: pointer; transition: all .2s; }
+    .btn-warn:hover { background: #d97706; }
+    .btn-cancel-modal { flex: 1; background: var(--bg-elevated); color: var(--text-secondary); border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 14px; font-weight: 600; padding: 12px; cursor: pointer; transition: all .2s; }
+    .btn-cancel-modal:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+
+    /* ── CHECKING OVERLAY (แสดงระหว่างดึง GAS) ── */
+    .check-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; z-index: 998; }
+    .check-overlay.hidden { display: none; }
+    .check-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; text-align: center; }
+    .check-spinner { font-size: 32px; animation: spin .8s linear infinite; margin-bottom: 10px; }
+    .check-text { font-size: 13px; color: var(--text-secondary); }
+
+    .btn-primary { display: block; width: 100%; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; padding: 14px; cursor: pointer; transition: all .2s; box-shadow: var(--shadow-accent); position: relative; overflow: hidden; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,.1) 0%, transparent 100%); }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(255,77,28,.45); }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .btn-success { flex: 1; background: var(--success); color: #fff; border: none; border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 700; padding: 13px; cursor: pointer; transition: all .2s; }
     .btn-success:hover { background: #16a34a; }
-    .btn-ghost { flex: 1; background: var(--bg-elevated); color: var(--text-secondary); border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; padding: 13px; cursor: pointer; transition: all 0.2s; }
+    .btn-ghost { flex: 1; background: var(--bg-elevated); color: var(--text-secondary); border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 600; padding: 13px; cursor: pointer; transition: all .2s; }
     .btn-ghost:hover { border-color: var(--text-secondary); color: var(--text-primary); }
     .btn-row { display: flex; gap: 10px; margin-top: 4px; }
 
-    /* Summary */
     .summary-list { list-style: none; }
     .summary-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); gap: 12px; font-size: 14px; }
     .summary-item:last-child { border-bottom: none; }
@@ -153,54 +142,78 @@
     .summary-val { color: var(--text-primary); font-weight: 600; text-align: right; word-break: break-all; }
     .summary-val.highlight { color: var(--accent2); font-family: 'Oswald', sans-serif; font-size: 20px; }
 
-    /* Processing */
     .processing-wrap { text-align: center; padding: 28px 20px 16px; }
     .processing-icon { font-size: 48px; display: block; margin-bottom: 16px; }
     .processing-icon.spin-anim { animation: pulse 1.5s ease-in-out infinite; }
-    .processing-icon.done-anim { animation: successPop 0.5s ease both; }
+    .processing-icon.done-anim { animation: successPop .5s ease both; }
     .processing-title { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
     .processing-msg { font-size: 13px; color: var(--text-secondary); min-height: 18px; }
 
-    /* Progress bar */
     .progress-section { display: none; margin-top: 16px; background: var(--bg-elevated); border-radius: var(--radius-sm); padding: 14px; border: 1px solid var(--border); }
     .progress-section.show { display: block; }
     .progress-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
     .progress-label { font-size: 12px; color: var(--text-secondary); font-weight: 600; }
-    .progress-pct { font-size: 14px; color: var(--accent); font-weight: 700; font-family: 'Oswald', sans-serif; transition: color 0.3s; }
+    .progress-pct   { font-size: 14px; color: var(--accent); font-weight: 700; font-family: 'Oswald', sans-serif; transition: color .3s; }
     .progress-pct.done { color: var(--success); }
     .progress-track { height: 8px; background: var(--bg-input); border-radius: 100px; overflow: hidden; }
-    .progress-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.35s ease; width: 0; box-shadow: 0 0 8px var(--accent-glow); }
-    .progress-fill.done { background: linear-gradient(90deg, var(--success), #4ade80); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
-    .progress-sub { display: flex; justify-content: space-between; margin-top: 6px; }
-    .progress-status { font-size: 11px; color: var(--text-muted); }
-    .progress-size   { font-size: 11px; color: var(--text-muted); font-family: 'Oswald', sans-serif; }
-    .progress-warn { margin-top: 8px; font-size: 11px; color: var(--accent2); }
+    .progress-fill  { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .35s ease; width: 0; box-shadow: 0 0 8px var(--accent-glow); }
+    .progress-fill.done { background: linear-gradient(90deg, var(--success), #4ade80); box-shadow: 0 0 8px rgba(34,197,94,.4); }
+    .progress-sub   { display: flex; justify-content: space-between; margin-top: 6px; }
+    .progress-status{ font-size: 11px; color: var(--text-muted); }
+    .progress-size  { font-size: 11px; color: var(--text-muted); font-family: 'Oswald', sans-serif; }
+    .progress-warn  { margin-top: 8px; font-size: 11px; color: var(--accent2); }
 
-    /* Step list */
     .step-list { margin-top: 14px; }
     .step-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
     .step-row:last-child { border-bottom: none; }
-    .step-ico { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; background: var(--bg-elevated); border: 1.5px solid var(--border); color: var(--text-muted); transition: all 0.3s; }
-    .step-ico.spinning { border-color: var(--accent); animation: spin 0.8s linear infinite; }
+    .step-ico { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; background: var(--bg-elevated); border: 1.5px solid var(--border); color: var(--text-muted); transition: all .3s; }
+    .step-ico.spinning { border-color: var(--accent); animation: spin .8s linear infinite; }
     .step-ico.done-ico { background: var(--success-dim); border-color: var(--success); color: var(--success); animation: none; }
-    .step-ico.err-ico  { background: rgba(239,68,68,0.1); border-color: var(--danger); color: var(--danger); animation: none; }
+    .step-ico.err-ico  { background: rgba(239,68,68,.1); border-color: var(--danger); color: var(--danger); animation: none; }
     .step-txt { flex: 1; color: var(--text-secondary); }
     .step-txt.active { color: var(--text-primary); font-weight: 600; }
-    .step-tag { font-size: 10px; padding: 2px 7px; border-radius: 100px; background: var(--accent-dim); color: var(--accent); font-weight: 700; letter-spacing: 0.5px; white-space: nowrap; }
+    .step-tag { font-size: 10px; padding: 2px 7px; border-radius: 100px; background: var(--accent-dim); color: var(--accent); font-weight: 700; letter-spacing: .5px; white-space: nowrap; }
     .step-tag.green { background: var(--success-dim); color: var(--success); }
 
-    .error-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: var(--radius-sm); padding: 14px 16px; color: #fca5a5; font-size: 13px; display: none; margin-top: 12px; }
+    .error-box { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); border-radius: var(--radius-sm); padding: 14px 16px; color: #fca5a5; font-size: 13px; display: none; margin-top: 12px; }
     .error-box.show { display: block; }
     .hidden { display: none !important; }
 
-    @keyframes fadeDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeUp   { from{opacity:0;transform:translateY(14px)}  to{opacity:1;transform:translateY(0)} }
-    @keyframes pulse    { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
-    @keyframes spin     { to{transform:rotate(360deg)} }
-    @keyframes successPop { 0%{transform:scale(0.6);opacity:0} 70%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
+    @keyframes fadeDown  { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp    { from{opacity:0;transform:translateY(14px)}  to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
+    @keyframes popUp     { from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)} }
+    @keyframes pulse     { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+    @keyframes spin      { to{transform:rotate(360deg)} }
+    @keyframes successPop{ 0%{transform:scale(.6);opacity:0} 70%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
   </style>
 </head>
 <body>
+
+<!-- CHECKING OVERLAY -->
+<div class="check-overlay hidden" id="checkOverlay">
+  <div class="check-box">
+    <div class="check-spinner">🔍</div>
+    <div class="check-text">กำลังตรวจสอบข้อมูลซ้ำ...</div>
+  </div>
+</div>
+
+<!-- DUPLICATE WARNING MODAL -->
+<div class="modal-overlay hidden" id="dupModal">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <div class="modal-title">พบข้อมูลซ้ำ!</div>
+    <div class="modal-body">
+      พบการส่งข้อมูลที่<strong>เหมือนกันทุกฟิลด์</strong>ใน 24 ชั่วโมงที่ผ่านมา
+      <div class="dup-detail" id="dupDetail"></div>
+      ต้องการส่งข้อมูลซ้ำหรือไม่?
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel-modal" onclick="closeDupModal(false)">← ยกเลิก</button>
+      <button class="btn-warn"         onclick="closeDupModal(true)">ส่งต่อไป →</button>
+    </div>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-badge"><span>🏃</span> RUN CHALLENGE</div>
@@ -211,10 +224,10 @@
 <div class="wrap">
   <div class="steps" id="stepIndicator">
     <div class="step-dot active" id="s1">1</div>
-    <div class="step-line" id="sl1"></div>
-    <div class="step-dot" id="s2">2</div>
-    <div class="step-line" id="sl2"></div>
-    <div class="step-dot" id="s3">3</div>
+    <div class="step-line"  id="sl1"></div>
+    <div class="step-dot"   id="s2">2</div>
+    <div class="step-line"  id="sl2"></div>
+    <div class="step-dot"   id="s3">3</div>
   </div>
 
   <!-- FORM -->
@@ -255,15 +268,13 @@
           <span class="upload-icon" id="uploadIcon">📷</span>
           <div class="upload-text" id="uploadText">แตะเพื่อเลือกไฟล์</div>
           <div class="upload-hint">รองรับ JPG, PNG, MP4, MOV</div>
-          <div id="compressBadge" style="display:none">
-            <span class="compress-badge">⚡ บีบอัดรูปอัตโนมัติ</span>
-          </div>
+          <div id="compressBadge" style="display:none"><span class="compress-badge">⚡ บีบอัดรูปอัตโนมัติ</span></div>
         </div>
         <div class="file-preview-box" id="filePreviewBox">
           <img id="imagePreview" src="#" alt="" style="display:none">
           <video id="videoPreview" controls autoplay muted playsinline style="display:none"></video>
           <div class="file-preview-name">
-            <span id="previewFileName" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+            <span class="fn" id="previewFileName"></span>
             <span class="size-info" id="sizeInfo"></span>
             <button onclick="clearFile()">✕</button>
           </div>
@@ -283,8 +294,8 @@
       <ul class="summary-list" id="data-summary"></ul>
     </div>
     <div class="btn-row">
-      <button class="btn-ghost" onclick="editData()">← แก้ไข</button>
-      <button class="btn-success" onclick="submitData()">✓ ยืนยันส่ง</button>
+      <button class="btn-ghost"   onclick="editData()">← แก้ไข</button>
+      <button class="btn-success" id="confirmBtn" onclick="handleSubmitClick()">✓ ยืนยันส่ง</button>
     </div>
   </div>
 
@@ -296,27 +307,23 @@
         <div class="processing-title" id="processingTitle">กำลังดำเนินการ</div>
         <div class="processing-msg"  id="processingMsg">กรุณารอสักครู่...</div>
       </div>
-
       <div class="progress-section" id="progressSection">
         <div class="progress-header">
           <span class="progress-label" id="progressLabel">อัปโหลด...</span>
           <span class="progress-pct"   id="progressPct">0%</span>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
         <div class="progress-sub">
           <span class="progress-status" id="progressStatus">กำลังส่ง...</span>
           <span class="progress-size"   id="progressSize"></span>
         </div>
         <div class="progress-warn">⚠️ กรุณาอย่าปิดหน้าต่างนี้จนกว่าจะเสร็จ</div>
       </div>
-
       <div class="step-list">
         <div class="step-row">
           <div class="step-ico" id="ico-text">1</div>
           <div class="step-txt" id="txt-text">บันทึกข้อมูล Google Sheet</div>
-          <span class="step-tag green" id="tag-text" style="display:none">ทำงานพร้อมกัน</span>
+          <span class="step-tag green" id="tag-text" style="display:none">พร้อมกัน</span>
         </div>
         <div class="step-row" id="row-thumb" style="display:none">
           <div class="step-ico" id="ico-thumb">2</div>
@@ -329,7 +336,7 @@
         <div class="step-row">
           <div class="step-ico" id="ico-summary">4</div>
           <div class="step-txt" id="txt-summary">ดึงข้อมูลสรุปผล</div>
-          <span class="step-tag green" id="tag-summary" style="display:none">ทำงานพร้อมกัน</span>
+          <span class="step-tag green">พร้อมกัน</span>
         </div>
         <div class="step-row">
           <div class="step-ico" id="ico-line">5</div>
@@ -355,39 +362,89 @@ window.fetch = async (url, opts) => {
 const liffId    = "2007483213-M8nB0DEV";
 const scriptURL = "https://script.google.com/macros/s/AKfycbzfiEl9j14L25hhGKciyTpWQewnmebs2aSWvWOMkLOEuZdbJiGLQOCPUN5IB1h-JFA/exec";
 
-// ── Image compression settings ──
-const IMG_MAX_PX  = 1600;   // max width or height px
-const IMG_QUALITY = 0.75;   // JPEG quality
-const IMG_MAX_MB  = 2;      // ถ้ารูปเกิน 2MB ค่อยบีบ
+const IMG_MAX_PX  = 1600;
+const IMG_QUALITY = 0.75;
+const IMG_MAX_MB  = 2;
 
-let formData           = {};
-let selectedFile       = null;
-let selectedFileBase64 = null;  // compressed or original
-let originalSizeBytes  = 0;
+let formData            = {};
+let selectedFile        = null;
+let selectedFileBase64  = null;
+let originalSizeBytes   = 0;
 let compressedSizeBytes = 0;
+let _dupResolve         = null;
 
-// ── WARM-UP: ping GAS ทันทีที่โหลดหน้า เพื่อตื่น cold start ──
-function warmUpGAS() {
-  _fetch(`${scriptURL}?action=ping`).catch(() => {});
+// ══════════════════════════════════════════════
+// DUPLICATE CHECK — ดึงจาก Google Sheet ผ่าน GAS
+// ตรวจจาก: ทีม + jocName + officerName + distance (ทุกฟิลด์)
+// ภายใน 24 ชั่วโมง
+// ══════════════════════════════════════════════
+async function checkDuplicateFromSheet(team, jocName, officerName, distance) {
+  try {
+    const params = new URLSearchParams({
+      action: 'checkDuplicate',
+      team, jocName, officerName,
+      distance: String(distance)
+    });
+    const r = await _fetch(`${scriptURL}?${params}`);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    if (j.status === 'error') throw new Error(j.message);
+    return j; // { status, duplicate, entry }
+  } catch (err) {
+    console.warn('checkDuplicate failed (skipping):', err.message);
+    // ถ้า GAS ตอบไม่ได้ → ข้ามการตรวจ ไม่บล็อกการส่ง
+    return { status: 'success', duplicate: false, entry: null };
+  }
 }
 
-// ── INIT ──
+// แสดง modal และรอคำตอบ (Promise)
+function showDupModal(entry) {
+  // format timestamp จาก GAS (string)
+  let timeStr = '';
+  try {
+    const d = new Date(entry.timestamp);
+    if (!isNaN(d)) {
+      timeStr = d.toLocaleString('th-TH', {
+        timeZone: 'Asia/Bangkok',
+        dateStyle: 'short',
+        timeStyle: 'short'
+      });
+    }
+  } catch {}
+
+  document.getElementById('dupDetail').innerHTML =
+    (timeStr ? `📅 เวลา: <strong>${timeStr}</strong><br>` : '') +
+    `🔴 ทีม: <strong>${entry.team || '-'}</strong><br>` +
+    `👤 นทน. JOC: <strong>${entry.jocName || '-'}</strong><br>` +
+    `👤 ข้าราชการ: <strong>${entry.officerName || '-'}</strong><br>` +
+    `📏 ระยะ: <strong>${entry.distance || '-'} กม.</strong>`;
+
+  document.getElementById('dupModal').classList.remove('hidden');
+
+  return new Promise(resolve => { _dupResolve = resolve; });
+}
+
+function closeDupModal(proceed) {
+  document.getElementById('dupModal').classList.add('hidden');
+  if (_dupResolve) { _dupResolve(proceed); _dupResolve = null; }
+}
+
+// ══════════════════════════════════════════════
+
+function warmUpGAS() { _fetch(`${scriptURL}?action=ping`).catch(() => {}); }
+
 async function initializeLiff() {
-  warmUpGAS(); // fire-and-forget
+  warmUpGAS();
   try {
     await liff.init({ liffId });
     const btn = document.getElementById('preview-button');
-    btn.disabled    = true;
-    btn.textContent = 'กำลังโหลดข้อมูล...';
+    btn.disabled = true; btn.textContent = 'กำลังโหลดข้อมูล...';
     await Promise.all([
       populateDropdown('ฐานข้อมูล', 'A', 'team'),
       populateDropdown('ฐานข้อมูล', 'B', 'jocName')
     ]);
-    btn.disabled    = false;
-    btn.textContent = 'ดูตัวอย่างก่อนส่ง →';
-  } catch (err) {
-    showError('เกิดข้อผิดพลาดในการโหลด: ' + err.message);
-  }
+    btn.disabled = false; btn.textContent = 'ดูตัวอย่างก่อนส่ง →';
+  } catch (err) { showError('เกิดข้อผิดพลาดในการโหลด: ' + err.message); }
 }
 
 async function populateDropdown(sheet, col, id) {
@@ -399,33 +456,26 @@ async function populateDropdown(sheet, col, id) {
     if (list.status === 'error') throw new Error(list.message);
     sel.innerHTML = '<option value="">— เลือก —</option>';
     list.forEach(v => sel.add(new Option(v, v)));
-  } catch (e) {
-    sel.innerHTML = '<option value="">โหลดไม่สำเร็จ</option>';
-  } finally { sel.disabled = false; }
+  } catch { sel.innerHTML = '<option value="">โหลดไม่สำเร็จ</option>'; }
+  finally  { sel.disabled = false; }
 }
 
 // ── IMAGE COMPRESSION ──
 function compressImage(file) {
-  return new Promise((resolve) => {
-    // ถ้าเป็น video หรือไฟล์เล็กกว่า IMG_MAX_MB → ไม่บีบ
-    if (!file.type.startsWith('image/') || file.size < IMG_MAX_MB * 1024 * 1024) {
-      resolve(null); // null = ไม่ได้บีบ ให้ใช้ original
-      return;
-    }
-    const img    = new Image();
-    const reader = new FileReader();
-    reader.onload = (e) => {
+  return new Promise(resolve => {
+    if (!file.type.startsWith('image/') || file.size < IMG_MAX_MB * 1024 * 1024) { resolve(null); return; }
+    const img = new Image(), reader = new FileReader();
+    reader.onload = e => {
       img.onload = () => {
         let { width: w, height: h } = img;
-        // scale down ถ้าใหญ่เกิน
         if (w > IMG_MAX_PX || h > IMG_MAX_PX) {
           if (w > h) { h = Math.round(h * IMG_MAX_PX / w); w = IMG_MAX_PX; }
           else       { w = Math.round(w * IMG_MAX_PX / h); h = IMG_MAX_PX; }
         }
-        const canvas = document.createElement('canvas');
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        resolve(canvas.toDataURL('image/jpeg', IMG_QUALITY));
+        const can = document.createElement('canvas');
+        can.width = w; can.height = h;
+        can.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(can.toDataURL('image/jpeg', IMG_QUALITY));
       };
       img.src = e.target.result;
     };
@@ -438,22 +488,16 @@ document.getElementById('fileUpload').addEventListener('change', async function(
   const file = e.target.files[0];
   if (!file) { clearFile(); return; }
   if (file.size > 50 * 1024 * 1024) { alert('ไฟล์ใหญ่เกิน 50MB'); clearFile(); return; }
-
-  selectedFile    = file;
-  originalSizeBytes = file.size;
-
-  // แสดง preview ก่อนด้วย original เพื่อความเร็ว
-  const origReader = new FileReader();
-  origReader.onload = async (ev) => {
+  selectedFile = file; originalSizeBytes = file.size;
+  const reader = new FileReader();
+  reader.onload = async ev => {
     const origB64 = ev.target.result;
-    showFilePreview(file, origB64, null); // preview ก่อน
-
-    // บีบอัดในพื้นหลัง
+    showFilePreview(file, origB64);
     if (file.type.startsWith('image/')) {
       const compressed = await compressImage(file);
       if (compressed) {
         selectedFileBase64  = compressed;
-        compressedSizeBytes = Math.round(compressed.length * 0.75); // approx bytes
+        compressedSizeBytes = Math.round(compressed.length * .75);
         showSizeInfo(originalSizeBytes, compressedSizeBytes);
         document.getElementById('compressBadge').style.display = '';
       } else {
@@ -467,17 +511,16 @@ document.getElementById('fileUpload').addEventListener('change', async function(
       document.getElementById('compressBadge').style.display = 'none';
     }
   };
-  origReader.readAsDataURL(file);
+  reader.readAsDataURL(file);
 });
 
-function showFilePreview(file, dataUrl, compressedB64) {
+function showFilePreview(file, dataUrl) {
   const isImg = file.type.startsWith('image/');
-  const img   = document.getElementById('imagePreview');
-  const vid   = document.getElementById('videoPreview');
+  const img = document.getElementById('imagePreview'), vid = document.getElementById('videoPreview');
   img.style.display = isImg ? 'block' : 'none';
   vid.style.display = isImg ? 'none'  : 'block';
-  if (isImg) { img.src = dataUrl; }
-  else       { vid.src = dataUrl; vid.load(); vid.play().catch(() => {}); }
+  if (isImg) img.src = dataUrl;
+  else { vid.src = dataUrl; vid.load(); vid.play().catch(() => {}); }
   document.getElementById('previewFileName').textContent = file.name;
   document.getElementById('filePreviewBox').classList.add('show');
   document.getElementById('uploadIcon').textContent = isImg ? '🖼️' : '🎬';
@@ -485,14 +528,12 @@ function showFilePreview(file, dataUrl, compressedB64) {
   showSizeInfo(file.size, null);
 }
 
-function showSizeInfo(orig, compressed) {
+function showSizeInfo(orig, comp) {
   const el = document.getElementById('sizeInfo');
-  if (compressed && compressed < orig) {
-    const saved = Math.round((1 - compressed / orig) * 100);
-    el.textContent = `${formatBytes(orig)} → ${formatBytes(compressed)} (-${saved}%)`;
-  } else {
-    el.textContent = formatBytes(orig);
-  }
+  if (comp && comp < orig) {
+    const pct = Math.round((1 - comp / orig) * 100);
+    el.textContent = `${formatBytes(orig)} → ${formatBytes(comp)} (-${pct}%)`;
+  } else { el.textContent = formatBytes(orig); }
 }
 
 function clearFile() {
@@ -502,16 +543,16 @@ function clearFile() {
   document.getElementById('filePreviewBox').classList.remove('show');
   document.getElementById('imagePreview').src = '#';
   document.getElementById('videoPreview').src = '';
-  document.getElementById('uploadIcon').textContent  = '📷';
-  document.getElementById('uploadText').textContent  = 'แตะเพื่อเลือกไฟล์';
+  document.getElementById('uploadIcon').textContent = '📷';
+  document.getElementById('uploadText').textContent = 'แตะเพื่อเลือกไฟล์';
   document.getElementById('compressBadge').style.display = 'none';
 }
 
 function formatBytes(b) {
   if (!b) return '';
   if (b < 1024)    return b + ' B';
-  if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
-  return (b / 1048576).toFixed(1) + ' MB';
+  if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+  return (b/1048576).toFixed(1) + ' MB';
 }
 
 // ── STEP UI ──
@@ -519,10 +560,10 @@ function setStep(n) {
   for (let i = 1; i <= 3; i++) {
     const d = document.getElementById('s' + i);
     const l = document.getElementById('sl' + i);
-    d.classList.remove('active', 'done');
+    d.classList.remove('active','done');
     if      (i < n) { d.classList.add('done'); d.textContent = '✓'; }
     else if (i === n){ d.classList.add('active'); d.textContent = i; }
-    else             { d.textContent = i; }
+    else            { d.textContent = i; }
     if (l) l.classList.toggle('done', i < n);
   }
 }
@@ -531,78 +572,57 @@ function setStepState(id, state, text) {
   const ico = document.getElementById('ico-' + id);
   const txt = document.getElementById('txt-' + id);
   if (!ico) return;
-  const prev = ico.textContent;
-  ico.className = 'step-ico';
-  txt.className = 'step-txt';
+  ico.className = 'step-ico'; txt.className = 'step-txt';
   if (state === 'spin')  { ico.classList.add('spinning'); ico.textContent = '↻'; txt.classList.add('active'); }
   if (state === 'done')  { ico.classList.add('done-ico'); ico.textContent = '✓'; }
   if (state === 'error') { ico.classList.add('err-ico');  ico.textContent = '✕'; }
-  if (state === 'idle')  { ico.textContent = prev; }
   if (text) txt.textContent = text;
 }
 
-// ── PROGRESS BAR (simulated) ──
+// ── PROGRESS ──
 let _progressTimer = null;
-
 function showProgress(label, sizeBytes) {
   clearInterval(_progressTimer);
-  const sec = document.getElementById('progressSection');
-  sec.classList.add('show');
+  document.getElementById('progressSection').classList.add('show');
   document.getElementById('progressLabel').textContent = label;
   document.getElementById('progressSize').textContent  = sizeBytes ? formatBytes(sizeBytes) : '';
   setProgress(0, 'กำลังเชื่อมต่อ...');
 }
-
 function setProgress(pct, status) {
-  const fill = document.getElementById('progressFill');
-  const pctEl = document.getElementById('progressPct');
-  fill.style.width   = Math.min(pct, 100) + '%';
-  fill.classList.remove('done');
-  pctEl.classList.remove('done');
-  pctEl.textContent  = Math.round(pct) + '%';
+  document.getElementById('progressFill').style.width = Math.min(pct,100) + '%';
+  document.getElementById('progressFill').classList.remove('done');
+  document.getElementById('progressPct').classList.remove('done');
+  document.getElementById('progressPct').textContent   = Math.round(pct) + '%';
   document.getElementById('progressStatus').textContent = status || '';
 }
-
-// simulate progress to 90% — จะไปถึง 100% เมื่อ fetch เสร็จจริง
 function simulateProgress(sizeBytes) {
   clearInterval(_progressTimer);
-  // ~100–150 KB/s through GAS (conservative), at least 5 s
-  const durationMs = Math.max(5000, (sizeBytes / 120000) * 1000);
-  const tickMs     = 250;
-  let   current    = 0;
+  const dur = Math.max(5000, (sizeBytes / 120000) * 1000);
+  let cur = 0;
   _progressTimer = setInterval(() => {
-    const remaining = 90 - current;
-    current += remaining * (tickMs / durationMs) * 3;
-    current  = Math.min(current, 89.5);
-    const status = current < 25 ? 'กำลังเชื่อมต่อ...'
-                 : current < 55 ? 'กำลังส่งข้อมูล...'
-                 : 'กำลังบันทึก...';
-    setProgress(current, status);
-  }, tickMs);
+    cur += (90 - cur) * (250 / dur) * 3; cur = Math.min(cur, 89.5);
+    setProgress(cur, cur < 25 ? 'กำลังเชื่อมต่อ...' : cur < 55 ? 'กำลังส่งข้อมูล...' : 'กำลังบันทึก...');
+  }, 250);
 }
-
 function doneProgress(msg) {
   clearInterval(_progressTimer);
-  const fill  = document.getElementById('progressFill');
-  const pctEl = document.getElementById('progressPct');
-  fill.style.width = '100%';
-  fill.classList.add('done');
-  pctEl.textContent = '100%';
-  pctEl.classList.add('done');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressFill').classList.add('done');
+  document.getElementById('progressPct').textContent  = '100%';
+  document.getElementById('progressPct').classList.add('done');
   document.getElementById('progressStatus').textContent = msg || 'สำเร็จ ✓';
 }
-
 function hideProgress() {
   clearInterval(_progressTimer);
   document.getElementById('progressSection').classList.remove('show');
 }
 
-// ── PREVIEW / EDIT ──
+// ── PREVIEW ──
 function previewData() {
-  const team  = document.getElementById('team').value;
-  const joc   = document.getElementById('jocName').value;
-  const off   = document.getElementById('officerName').value.trim();
-  const dist  = document.getElementById('distance').value;
+  const team = document.getElementById('team').value;
+  const joc  = document.getElementById('jocName').value;
+  const off  = document.getElementById('officerName').value.trim();
+  const dist = document.getElementById('distance').value;
   if (!team || !dist || parseFloat(dist) <= 0) {
     alert('กรุณากรอกข้อมูลให้ครบ: ทีม และระยะทางต้องมากกว่า 0'); return;
   }
@@ -611,28 +631,22 @@ function previewData() {
   }
   formData = {
     Timestamp:   new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok' }),
-    team,
-    jocName:     joc || '(ไม่ได้ระบุ)',
-    officerName: off || '(ไม่ได้ระบุ)',
-    distance:    dist,
-    fileName:    selectedFile ? selectedFile.name : '(ไม่ได้แนบไฟล์)'
+    team, jocName: joc || '(ไม่ได้ระบุ)', officerName: off || '(ไม่ได้ระบุ)',
+    distance: dist, fileName: selectedFile ? selectedFile.name : '(ไม่ได้แนบไฟล์)'
   };
-
-  // แสดง size ที่จะส่งจริงในหน้า confirm
   const fileLabel = selectedFile
     ? `${selectedFile.name} (${compressedSizeBytes < originalSizeBytes
         ? formatBytes(originalSizeBytes) + ' → ' + formatBytes(compressedSizeBytes)
         : formatBytes(originalSizeBytes)})`
     : '(ไม่ได้แนบไฟล์)';
-
   const rows = [
-    ['ทีม',                    formData.team],
-    ['ชื่อ นทน. JOC',          formData.jocName],
+    ['ทีม', formData.team],
+    ['ชื่อ นทน. JOC', formData.jocName],
     ['ชื่อ ข้าราชการ สศท.สปท.', formData.officerName],
-    ['ระยะทาง',                formData.distance + ' กม.', 'highlight'],
-    ['ไฟล์แนบ',               fileLabel],
+    ['ระยะทาง', formData.distance + ' กม.', 'highlight'],
+    ['ไฟล์แนบ', fileLabel],
   ];
-  document.getElementById('data-summary').innerHTML = rows.map(([k, v, c]) =>
+  document.getElementById('data-summary').innerHTML = rows.map(([k,v,c]) =>
     `<li class="summary-item"><span class="summary-key">${k}</span><span class="summary-val ${c||''}">${v}</span></li>`
   ).join('');
   document.getElementById('form-section').classList.add('hidden');
@@ -646,7 +660,32 @@ function editData() {
   setStep(1);
 }
 
-// ── GAS fetch wrapper ──
+// ── SUBMIT CLICK: ตรวจซ้ำจาก Sheet ก่อน ──
+async function handleSubmitClick() {
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled = true;
+
+  // แสดง overlay ระหว่างดึง GAS
+  document.getElementById('checkOverlay').classList.remove('hidden');
+
+  const result = await checkDuplicateFromSheet(
+    formData.team, formData.jocName, formData.officerName, formData.distance
+  );
+
+  document.getElementById('checkOverlay').classList.add('hidden');
+
+  if (result.duplicate && result.entry) {
+    const proceed = await showDupModal(result.entry);
+    btn.disabled = false;
+    if (!proceed) return; // ผู้ใช้กดยกเลิก
+  } else {
+    btn.disabled = false;
+  }
+
+  submitData();
+}
+
+// ── GAS fetch ──
 async function gasFetch(params) {
   const r = await _fetch(scriptURL, { method: 'POST', body: new URLSearchParams(params) });
   if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -666,10 +705,7 @@ async function submitData() {
   const hasFile = !!selectedFile;
   document.getElementById('row-thumb').style.display = isVideo ? '' : 'none';
   document.getElementById('row-file').style.display  = hasFile ? '' : 'none';
-
-  // แสดง tag "ทำงานพร้อมกัน" ให้รู้ว่า parallel
-  document.getElementById('tag-text').style.display    = hasFile ? '' : 'none';
-  document.getElementById('tag-summary').style.display = '';
+  document.getElementById('tag-text').style.display  = hasFile ? '' : 'none';
 
   let detailedMsg =
     `🏃🏻‍♂️🏃🏻‍♂️ การสะสมระยะเดิน/วิ่ง:\n\n` +
@@ -681,70 +717,41 @@ async function submitData() {
   let fileUrl = null, previewUrl = null;
 
   try {
-    // ══ PARALLEL BLOCK 1: submitText + (ถ้าไม่มีไฟล์) getSummary ══
     setStepState('text', 'spin', 'บันทึกข้อมูล Google Sheet');
     document.getElementById('processingMsg').textContent = 'กำลังบันทึกและอัปโหลดพร้อมกัน...';
-
-    // เริ่ม submitText ทันที (parallel)
     const textPromise = gasFetch({ action: 'submitText', textData: JSON.stringify(formData) });
 
-    // ══ VIDEO THUMBNAIL ══
     if (isVideo) {
       setStepState('thumb', 'spin', 'สร้างภาพปกวิดีโอ...');
       const thumbB64 = await generateVideoThumbnail(selectedFile);
-      showProgress('อัปโหลดภาพปก', thumbB64.length * 0.75);
-      simulateProgress(thumbB64.length * 0.75);
-      setStepState('thumb', 'spin', 'อัปโหลดภาพปก...');
-      const tr = await gasFetch({
-        action: 'uploadThumbnail',
-        fileData: thumbB64,
-        fileName: 'thumb_' + selectedFile.name.replace(/\.[^.]+$/, '') + '.jpg',
-        mimeType: 'image/jpeg'
-      });
+      showProgress('อัปโหลดภาพปก', thumbB64.length * .75);
+      simulateProgress(thumbB64.length * .75);
+      const tr = await gasFetch({ action: 'uploadThumbnail', fileData: thumbB64, fileName: 'thumb_' + selectedFile.name.replace(/\.[^.]+$/, '') + '.jpg', mimeType: 'image/jpeg' });
       previewUrl = tr.fileUrl;
-      doneProgress('อัปโหลดภาพปกสำเร็จ ✓');
-      setStepState('thumb', 'done');
-      await sleep(500);
-      hideProgress();
+      doneProgress('อัปโหลดภาพปกสำเร็จ ✓'); setStepState('thumb', 'done');
+      await sleep(500); hideProgress();
     }
 
-    // ══ MAIN FILE UPLOAD ══
     if (hasFile) {
       const uploadSize = compressedSizeBytes || originalSizeBytes;
       const label = `อัปโหลดไฟล์ (${formatBytes(uploadSize)})`;
-      showProgress(label, uploadSize);
-      simulateProgress(uploadSize);
+      showProgress(label, uploadSize); simulateProgress(uploadSize);
       setStepState('file', 'spin', label);
       document.getElementById('processingMsg').textContent = 'กำลังอัปโหลด — กรุณาอย่าปิดหน้าต่างนี้';
-
-      const fr = await gasFetch({
-        action:   'uploadFile',
-        fileData: selectedFileBase64,
-        fileName: selectedFile.name,
-        mimeType: selectedFile.type
-      });
+      const fr = await gasFetch({ action: 'uploadFile', fileData: selectedFileBase64, fileName: selectedFile.name, mimeType: selectedFile.type });
       fileUrl = fr.fileUrl;
-      doneProgress('อัปโหลดสำเร็จ ✓');
-      setStepState('file', 'done');
-      await sleep(500);
-      hideProgress();
+      doneProgress('อัปโหลดสำเร็จ ✓'); setStepState('file', 'done');
+      await sleep(500); hideProgress();
     }
 
-    // ══ PARALLEL BLOCK 2: รอ text + เริ่ม getSummary พร้อมกัน ══
-    setStepState('text',    'spin', 'รอการยืนยัน...');
+    setStepState('text', 'spin', 'รอการยืนยัน...');
     setStepState('summary', 'spin', 'ดึงข้อมูลสรุปผล...');
     document.getElementById('processingMsg').textContent = 'กำลังดึงข้อมูลสรุป...';
 
-    const [textResult, summaryData] = await Promise.all([
-      textPromise,
-      fetchSummary()
-    ]);
-
+    const [textResult, summaryData] = await Promise.all([textPromise, fetchSummary()]);
     if (textResult.status !== 'success') throw new Error('บันทึกข้อมูลไม่สำเร็จ: ' + (textResult.message || ''));
-    setStepState('text',    'done');
-    setStepState('summary', 'done');
+    setStepState('text', 'done'); setStepState('summary', 'done');
 
-    // ══ BUILD LINE MESSAGES ══
     const lineMessages = [];
     if (fileUrl) {
       const fm = createLineMsg(selectedFile.type, fileUrl, previewUrl);
@@ -755,18 +762,15 @@ async function submitData() {
     detailedMsg += '🏆 สรุปผล Run Challenge:\n';
     if (summaryData) {
       detailedMsg += `🎯 ระยะ Challenge: ${summaryData.challengeGoal || 'N/A'} กม.\n`;
-      detailedMsg += `📈 ระยะสะสม: ${(summaryData.totalAccumulated || 0).toFixed(2)} กม.\n\n`;
-      (summaryData.teams || []).forEach(t => {
+      detailedMsg += `📈 ระยะสะสม: ${(summaryData.totalAccumulated||0).toFixed(2)} กม.\n\n`;
+      (summaryData.teams||[]).forEach(t => {
         if (t.name) detailedMsg += `🔻 ทีม ${t.name}\n • ระยะ: ${(t.distance||0).toFixed(2)} กม. | อันดับ: ${t.rank||'N/A'}\n\n`;
       });
-    } else {
-      detailedMsg += '⚠️ ไม่สามารถโหลดข้อมูลสรุปได้\n\n';
-    }
+    } else { detailedMsg += '⚠️ ไม่สามารถโหลดข้อมูลสรุปได้\n\n'; }
     detailedMsg += `‼️ลิงก์ส่งระยะ: https://liff.line.me/${liffId}`;
 
     lineMessages.unshift({ type: 'text', text: detailedMsg });
 
-    // ══ SEND LINE ══
     setStepState('line', 'spin', 'ส่งข้อความ LINE...');
     document.getElementById('processingMsg').textContent = 'กำลังส่งข้อความ...';
 
@@ -774,12 +778,10 @@ async function submitData() {
       await liff.sendMessages(lineMessages);
       setStepState('line', 'done');
       const icon = document.getElementById('processingIcon');
-      icon.textContent = '🎉';
-      icon.className   = 'processing-icon done-anim';
+      icon.textContent = '🎉'; icon.className = 'processing-icon done-anim';
       document.getElementById('processingTitle').textContent = 'สำเร็จ!';
       document.getElementById('processingMsg').textContent   = 'ดำเนินการทั้งหมดเรียบร้อยแล้ว';
-      await sleep(2000);
-      liff.closeWindow();
+      await sleep(2000); liff.closeWindow();
     } else {
       setStepState('line', 'error', 'อยู่นอกแอป LINE');
       document.getElementById('processingIcon').textContent  = '✅';
@@ -789,48 +791,38 @@ async function submitData() {
 
   } catch (err) {
     console.error(err);
-    clearInterval(_progressTimer);
-    hideProgress();
+    clearInterval(_progressTimer); hideProgress();
     document.getElementById('processing-section').classList.add('hidden');
     showError('เกิดข้อผิดพลาด: ' + err.message);
-    setStep(2);
-    document.getElementById('confirm-section').classList.remove('hidden');
+    setStep(2); document.getElementById('confirm-section').classList.remove('hidden');
+    document.getElementById('confirmBtn').disabled = false;
   }
 }
 
-// ── HELPERS ──
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 function createLineMsg(type, url, preview) {
   if (type.startsWith('image/')) return { type: 'image', originalContentUrl: url, previewImageUrl: url };
-  if (type.startsWith('video/')) {
-    if (!preview) return null;
-    return { type: 'video', originalContentUrl: url, previewImageUrl: preview };
-  }
+  if (type.startsWith('video/')) { if (!preview) return null; return { type: 'video', originalContentUrl: url, previewImageUrl: preview }; }
   return null;
 }
 
 function generateVideoThumbnail(file) {
   return new Promise((resolve, reject) => {
-    const vid = document.createElement('video');
-    const can = document.createElement('canvas');
-    const r   = new FileReader();
-    r.onload  = e => {
-      vid.src   = e.target.result;
-      vid.muted = true;
+    const vid = document.createElement('video'), can = document.createElement('canvas'), r = new FileReader();
+    r.onload = e => {
+      vid.src = e.target.result; vid.muted = true;
       vid.onloadeddata = () => { vid.currentTime = 1; };
       vid.onseeked = () => {
         requestAnimationFrame(() => {
-          can.width  = vid.videoWidth;
-          can.height = vid.videoHeight;
+          can.width = vid.videoWidth; can.height = vid.videoHeight;
           can.getContext('2d').drawImage(vid, 0, 0);
-          resolve(can.toDataURL('image/jpeg', 0.8));
+          resolve(can.toDataURL('image/jpeg', .8));
         });
       };
       vid.onerror = reject;
     };
-    r.onerror = reject;
-    r.readAsDataURL(file);
+    r.onerror = reject; r.readAsDataURL(file);
   });
 }
 
@@ -844,8 +836,7 @@ async function fetchSummary() {
 
 function showError(msg) {
   const el = document.getElementById('error-message');
-  el.textContent = msg;
-  el.classList.add('show');
+  el.textContent = msg; el.classList.add('show');
 }
 
 window.onload = initializeLiff;
